@@ -1,6 +1,6 @@
 # Vinyl Market (0.1.0)
 
-**E-commerce de vinilos usados y de colección construido con Next.js**
+**E-commerce de vinilos usados y de colección basado en Next.js**
 
 ## Objetivo 
 Comercializar una colección de vinilos usados mediante una interfaz fluida, simple e intuitiva.
