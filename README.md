@@ -1,4 +1,4 @@
-# Vinyl Market (0.0.5)
+# Vinyl Market (0.1.0)
 
 **E-commerce de vinilos usados y de colección construido con Next.js**
 
