@@ -15,11 +15,13 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 * [ ] Sorting alfabético y por precio.
 * [ ] Paginación.
 * [ ] Modal interactivo por vinilo con más detalles: descripción, tracklist, condición, y preview de calidad sonora.
+* [ ] Carrito dinámico y sistema de check-out con manejo de pagos y envío.
 
 ### Back-end
 * [ ] Conexión con base de datos.
 * [ ] Hosting con dominio personalizado.
 * [ ] Caching para persistencia de carrito.
+* [ ] Mejoras de seguridad y performance.
 
 ## Metodología
 Este sítio está siendo construido tomando en cuenta todo lo aprendido en base a mis anteriores proyectos y estudio preliminar. 
