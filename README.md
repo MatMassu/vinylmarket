@@ -9,8 +9,8 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 
 ## Roadmap de Funcionalidades
 ### UX/UI
-* [x] Grilla de productos con imágen, artista, álbum, y precio en ARS.
-* [x] Busqueda de productos mediante parametros en URL, con debouncing para minimizar la cantidad de requests.
+* [x] Grilla de productos con imágen, artista, álbum, y precio en ARS. (v0.1.0)
+* [x] Busqueda de productos mediante parametros en URL, con debouncing para minimizar la cantidad de requests. (v0.1.0)
 * [ ] Filtros por artista, álbum y disponibilidad.
 * [ ] Sorting alfabético y por precio.
 * [ ] Paginación.
