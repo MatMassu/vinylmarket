@@ -1,6 +1,6 @@
-# Vinyl Market (0.0.5)
+# Vinyl Market (0.1.0)
 
-**E-commerce de vinilos usados y de colección construido con Next.js**
+**E-commerce de vinilos usados y de colección basado en Next.js**
 
 ## Objetivo 
 Comercializar una colección de vinilos usados mediante una interfaz fluida, simple e intuitiva.
@@ -9,17 +9,19 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 
 ## Roadmap de Funcionalidades
 ### UX/UI
-* [x] Grilla de productos con imágen, artista, álbum, y precio en ARS.
-* [x] Busqueda de productos mediante parametros en URL, con debouncing para minimizar la cantidad de requests.
+* [x] Grilla de productos con imágen, artista, álbum, y precio en ARS. (v0.1.0)
+* [x] Busqueda de productos mediante parametros en URL, con debouncing para minimizar la cantidad de requests. (v0.1.0)
 * [ ] Filtros por artista, álbum y disponibilidad.
 * [ ] Sorting alfabético y por precio.
 * [ ] Paginación.
 * [ ] Modal interactivo por vinilo con más detalles: descripción, tracklist, condición, y preview de calidad sonora.
+* [ ] Carrito dinámico y sistema de check-out con manejo de pagos y envío.
 
 ### Back-end
 * [ ] Conexión con base de datos.
 * [ ] Hosting con dominio personalizado.
 * [ ] Caching para persistencia de carrito.
+* [ ] Mejoras de seguridad y performance.
 
 ## Metodología
 Este sítio está siendo construido tomando en cuenta todo lo aprendido en base a mis anteriores proyectos y estudio preliminar. 
