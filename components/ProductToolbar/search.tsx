@@ -16,18 +16,18 @@ export default function SearchBar() {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  }, 500);
 
   return (
     <form role="search" className="flex h-10 bg-white">
       <label htmlFor="search" className="sr-only">
-        Buscar vinilos
+        Buscar vinilos (nombre o artista)
       </label>
       <input
         id="search"
         type="search"
         name="query"
-        placeholder="Buscar vinilos"
+        placeholder="Buscar vinilos (nombre o artista)"
         className="w-full px-2"
         onChange={(e) => {
           handleSearch(e.target.value);
