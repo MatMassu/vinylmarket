@@ -7,31 +7,43 @@ export default function Filter() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  function handleFilter(value: string) {
+  const isChecked = searchParams.get("filter") === "available";
+
+  function handleChange(checked: boolean) {
     const params = new URLSearchParams(searchParams);
-    if (value === "") {
-      params.delete("filter");
+    if (checked) {
+      params.set("filter", "available");
     } else {
-      params.set("filter", value);
+      params.delete("filter");
     }
     replace(`${pathname}?${params.toString()}`);
   }
 
   return (
-    <form role="filter" className="flex items-center h-10 px-4">
-      <fieldset className="">
-        <label htmlFor="filtros" className="mr-2">
-          Filtrar:
-        </label>
-        <select
-          id="filtros"
-          onChange={(e) => handleFilter(e.target.value)}
-          defaultValue={searchParams.get("filter") ?? ""}
-        >
-          <option value="">Limpiar filtros</option>
-          <option value="available">Disponibles</option>
-        </select>
-      </fieldset>
+    <form role="filter" className="flex items-center h-10">
+      <label htmlFor="available" className="flex items-center gap-2 cursor-pointer pr-8">
+        <input
+          type="checkbox"
+          id="available"
+          value="available"
+          checked={isChecked}
+          onChange={(e) => handleChange(e.target.checked)}
+        />
+        <span>Solo disponibles</span>
+      </label>
+      <button
+        type="button"
+        className="cursor-pointer hover:underline pr-5"
+        onClick={() => {
+          const params = new URLSearchParams(searchParams);
+          params.delete("query");
+          params.delete("filter");
+          params.delete("sort");
+          replace(`${pathname}?${params.toString()}`);
+        }}
+      >
+        Limpiar filtros
+      </button>
     </form>
   );
 }

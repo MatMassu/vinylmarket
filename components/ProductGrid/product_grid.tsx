@@ -1,15 +1,17 @@
 import ProductCard from "./product_card.tsx";
 import { products } from "./types.ts";
 
-type SortOption = "price-asc" | "price-desc" | "artist-asc" | "artist-desc";
+type SortOption = "price" | "artist";
+type OrderOption = "asc" | "desc";
 
 type ProductGridProps = {
   query?: string;
   filter?: string;
   sort?: SortOption;
+  order?: OrderOption;
 };
 
-export default function ProductGrid({ query, filter, sort }: ProductGridProps) {
+export default function ProductGrid({ query, filter, sort, order }: ProductGridProps) {
   let result = [...products];
 
   if (query) {
@@ -23,23 +25,20 @@ export default function ProductGrid({ query, filter, sort }: ProductGridProps) {
   }
 
   if (sort) {
-    switch (sort) {
-      case "price-asc":
-        result.sort((a, b) => a.price - b.price);
-        break;
+    result = [...result].sort((a, b) => {
+      const dir = order === "asc" ? 1 : -1;
 
-      case "price-desc":
-        result.sort((a, b) => b.price - a.price);
-        break;
-
-      case "artist-asc":
-        result.sort((a, b) => `${a.artist}`.localeCompare(`${b.artist}`));
-        break;
-
-      case "artist-desc":
-        result.sort((a, b) => `${b.artist}`.localeCompare(`${a.artist}`));
-        break;
-    }
+      switch (sort) {
+        case "price":
+          return (a.price - b.price) * dir;
+          break;
+        case "artist":
+          return a.artist.localeCompare(b.artist) * dir;
+          break;
+        default:
+          return 0;
+      }
+    });
   }
 
   return (
