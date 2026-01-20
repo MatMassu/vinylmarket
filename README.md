@@ -1,4 +1,4 @@
-# Vinyl Market (v0.2.0)
+# Vinyl Market (v0.3.0)
 
 **E-commerce de vinilos usados y de colección basado en Next.js**
 
@@ -12,7 +12,7 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 * [x] Grilla de productos con imágen, artista, álbum, y precio en ARS. (v0.1.0)
 * [x] Busqueda de productos mediante parametros en URL, con debouncing para minimizar la cantidad de requests. (v0.1.0)
 * [x] Filtros por artista, álbum y disponibilidad. (v0.2.0)
-* [ ] Sorting alfabético y por precio.
+* [x] Sorting alfabético y por precio.
 * [ ] Paginación.
 * [ ] Modal interactivo por vinilo con más detalles: descripción, tracklist, condición, y preview de calidad sonora.
 * [ ] Carrito dinámico y sistema de check-out con manejo de pagos y envío.

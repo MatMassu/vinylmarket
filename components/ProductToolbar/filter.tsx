@@ -18,22 +18,20 @@ export default function Filter() {
   }
 
   return (
-    <aside className="flex items-center h-10 px-4 justify-end">
-      <form>
-        <fieldset className="flex items-center">
-          <label htmlFor="filtros" className="mr-2">
-            Filtrar:
-          </label>
-          <select
-            id="filtros"
-            onChange={(e) => handleFilter(e.target.value)}
-            defaultValue={searchParams.get("filter") ?? ""}
-          >
-            <option value="">Limpiar filtros</option>
-            <option value="available">Disponibles</option>
-          </select>
-        </fieldset>
-      </form>
-    </aside>
+    <form role="filter" className="flex items-center h-10 px-4">
+      <fieldset className="">
+        <label htmlFor="filtros" className="mr-2">
+          Filtrar:
+        </label>
+        <select
+          id="filtros"
+          onChange={(e) => handleFilter(e.target.value)}
+          defaultValue={searchParams.get("filter") ?? ""}
+        >
+          <option value="">Limpiar filtros</option>
+          <option value="available">Disponibles</option>
+        </select>
+      </fieldset>
+    </form>
   );
 }

@@ -1,13 +1,16 @@
 import ProductCard from "./product_card.tsx";
 import { products } from "./types.ts";
 
+type SortOption = "price-asc" | "price-desc" | "artist-asc" | "artist-desc";
+
 type ProductGridProps = {
   query?: string;
   filter?: string;
+  sort?: SortOption;
 };
 
-export default function ProductGrid({ query, filter }: ProductGridProps) {
-  let result = products;
+export default function ProductGrid({ query, filter, sort }: ProductGridProps) {
+  let result = [...products];
 
   if (query) {
     result = result.filter((product) =>
@@ -17,6 +20,26 @@ export default function ProductGrid({ query, filter }: ProductGridProps) {
 
   if (filter === "available") {
     result = result.filter((product) => product.stock > 0);
+  }
+
+  if (sort) {
+    switch (sort) {
+      case "price-asc":
+        result.sort((a, b) => a.price - b.price);
+        break;
+
+      case "price-desc":
+        result.sort((a, b) => b.price - a.price);
+        break;
+
+      case "artist-asc":
+        result.sort((a, b) => `${a.artist}`.localeCompare(`${b.artist}`));
+        break;
+
+      case "artist-desc":
+        result.sort((a, b) => `${b.artist}`.localeCompare(`${a.artist}`));
+        break;
+    }
   }
 
   return (
