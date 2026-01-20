@@ -1,17 +1,20 @@
 import ProductCard from "./product_card.tsx";
 import { products } from "./types.ts";
+import Pagination from "../pagination.tsx";
 
 type SortOption = "price" | "artist";
 type OrderOption = "asc" | "desc";
-
 type ProductGridProps = {
+  page?: number;
   query?: string;
   filter?: string;
   sort?: SortOption;
   order?: OrderOption;
 };
 
-export default function ProductGrid({ query, filter, sort, order }: ProductGridProps) {
+const PAGE_SIZE = 12;
+
+export default function ProductGrid({ page = 1, query, filter, sort, order }: ProductGridProps) {
   let result = [...products];
 
   if (query) {
@@ -41,10 +44,14 @@ export default function ProductGrid({ query, filter, sort, order }: ProductGridP
     });
   }
 
+  const visibleCount = page * PAGE_SIZE;
+  const visibleProducts = result.slice(0, visibleCount);
+  const hasMore = visibleCount < result.length;
+
   return (
-    <section className="flex-1 overflow-y-auto bg-blue-400">
+    <section className="flex-1 overflow-y-auto">
       <div className="mx-auto grid max-w-7xl grid-cols-4 gap-6 p-6">
-        {result.map((product) => (
+        {visibleProducts.map((product) => (
           <ProductCard
             key={product.id}
             title={product.title}
@@ -54,6 +61,7 @@ export default function ProductGrid({ query, filter, sort, order }: ProductGridP
           />
         ))}
       </div>
+      {hasMore && <Pagination />}
     </section>
   );
 }

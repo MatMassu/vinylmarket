@@ -39,6 +39,8 @@ export default function Filter() {
           params.delete("query");
           params.delete("filter");
           params.delete("sort");
+          params.delete("page");
+          params.delete("order");
           replace(`${pathname}?${params.toString()}`);
         }}
       >

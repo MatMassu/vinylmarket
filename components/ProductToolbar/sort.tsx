@@ -24,7 +24,7 @@ export default function Sort() {
       </label>
       <button
         type="button"
-        className="px-1 mx-2 border border-gray-400 text-gray-400 rounded"
+        className="px-1 mx-2 border border-gray-400 text-gray-400 rounded cursor-pointer"
         onClick={() => handleSort(sort, order == "asc" ? "desc" : "asc")}
       >
         {order === "asc" ? "↑" : "↓"}

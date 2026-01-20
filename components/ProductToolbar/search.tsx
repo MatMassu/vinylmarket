@@ -10,6 +10,7 @@ export default function SearchBar() {
 
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
     if (term) {
       params.set("query", term);
     } else {
@@ -19,7 +20,7 @@ export default function SearchBar() {
   }, 500);
 
   return (
-    <form role="search" className="flex h-10 w-70 bg-white">
+    <form role="search" className="flex h-10 w-70">
       <label htmlFor="search" className="sr-only">
         Buscar vinilos (nombre o artista)
       </label>
