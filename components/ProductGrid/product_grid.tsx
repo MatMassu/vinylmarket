@@ -1,5 +1,5 @@
 import ProductCard from "./product_card.tsx";
-import { products } from "./types.ts";
+import { products } from "@/types/types.ts";
 import Pagination from "../pagination.tsx";
 
 type SortOption = "price" | "artist";
@@ -13,6 +13,7 @@ type ProductGridProps = {
 };
 
 const PAGE_SIZE = 12;
+const compareStrings = (a: string, b: string, dir: number) => a.localeCompare(b) * dir;
 
 export default function ProductGrid({ page = 1, query, filter, sort, order }: ProductGridProps) {
   let result = [...products];
@@ -36,7 +37,7 @@ export default function ProductGrid({ page = 1, query, filter, sort, order }: Pr
           return (a.price - b.price) * dir;
           break;
         case "artist":
-          return a.artist.localeCompare(b.artist) * dir;
+          return compareStrings(a.artist, b.artist, dir) || compareStrings(a.title, b.title, dir);
           break;
         default:
           return 0;
@@ -49,19 +50,18 @@ export default function ProductGrid({ page = 1, query, filter, sort, order }: Pr
   const hasMore = visibleCount < result.length;
 
   return (
-    <section className="flex-1 overflow-y-auto">
+    <section className="flex-1 overflow-y-auto pt-12">
       <div className="mx-auto grid max-w-7xl grid-cols-4 gap-6 p-6">
         {visibleProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            title={product.title}
-            artist={product.artist}
-            price={product.price}
-            stock={product.stock}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
       {hasMore && <Pagination />}
+      {visibleProducts.length == 0 && (
+        <div className="flex w-full justify-center">
+          No se encontraron resultados para "{query}"
+        </div>
+      )}
     </section>
   );
 }

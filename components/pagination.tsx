@@ -12,14 +12,14 @@ export default function Pagination() {
   function handlePagination() {
     const params = new URLSearchParams(searchParams);
     params.set("page", String(page + 1));
-    replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   return (
-    <form className="flex justify-center mb-5">
+    <form className="flex justify-center mb-100">
       <button
         type="button"
-        className="border rounded p-2 cursor-pointer bg-white"
+        className="border rounded p-2 cursor-pointer bg-white hover:scale-105 hover:shadow-md transition-all active:scale-99 active:shadow-xs"
         onClick={handlePagination}
       >
         Ver más...

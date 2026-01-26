@@ -1,10 +1,8 @@
 import "./globals.css";
-import Header from "../components/header.tsx";
-import ProductGrid from "../components/ProductGrid/product_grid.tsx";
-import SearchBar from "../components/ProductToolbar/search.tsx";
-import Filter from "../components/ProductToolbar/filter.tsx";
-import Sort from "../components/ProductToolbar/sort.tsx";
-import Pagination from "../components/pagination.tsx";
+import Header from "@/components/header.tsx";
+import ProductGrid from "@/components/ProductGrid/product_grid.tsx";
+import Pagination from "@/components/pagination.tsx";
+import Toolbar from "@/components/ProductToolbar/toolbar.tsx";
 
 export default async function Page({
   searchParams,
@@ -19,17 +17,9 @@ export default async function Page({
 }) {
   const params = await searchParams;
   return (
-    <main className="flex min-h-screen flex-col bg-blue-400">
+    <main className="flex min-h-screen flex-col bg-indigo-200">
       <Header />
-      <aside className="flex bg-white">
-        <div className="flex w-auto">
-          <SearchBar />
-        </div>
-        <div className="flex-1 flex items-center justify-end gap-4">
-          <Sort />
-          <Filter />
-        </div>
-      </aside>
+      <Toolbar />
       <ProductGrid
         page={Number(params.page ?? 1)}
         query={params.query}
