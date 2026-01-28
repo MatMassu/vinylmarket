@@ -8,7 +8,7 @@ export default function Toolbar() {
       <div className="md:flex">
         <SearchBar />
       </div>
-      <div className="md:flex-1 flex items-center justify-between md:justify-end gap-4">
+      <div className="md:flex-1 flex items-center justify-between md:justify-end gap-5">
         <Sort />
         <Filter />
       </div>

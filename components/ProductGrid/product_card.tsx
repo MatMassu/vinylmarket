@@ -19,10 +19,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="w-full h-full object-cover shadow-md cursor-pointer"
           />
         </div>
-        <div>
-          <h1 className="font-semibold"> {product.title} </h1>
-          <h2> {product.artist}</h2>
-          <p> ${product.price} </p>
+        <div className="text-xs md:text-base">
+          <h1 className="font-semibold text-sm md:text-xl"> {product.title} </h1>
+          <h2 className="md:text-base"> {product.artist}</h2>
+          <p className="md:text-base"> ${product.price} </p>
         </div>
       </div>
     </Link>

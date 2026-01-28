@@ -20,8 +20,8 @@ export default function Filter() {
   }
 
   return (
-    <form role="filter" className="flex items-center h-10">
-      <label htmlFor="available" className="flex items-center gap-2 cursor-pointer pr-8">
+    <form role="filter" className="flex items-center h-10 gap-3 md:gap-0 text-sm">
+      <label htmlFor="available" className="flex items-center gap-1 cursor-pointer md:pr-4">
         <input
           type="checkbox"
           id="available"
@@ -33,7 +33,7 @@ export default function Filter() {
       </label>
       <button
         type="button"
-        className="cursor-pointer hover:underline pr-5"
+        className="cursor-pointer hover:underline md:pr-5 pr-3"
         onClick={() => {
           const params = new URLSearchParams(searchParams);
           params.delete("query");

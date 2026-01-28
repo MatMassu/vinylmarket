@@ -50,8 +50,8 @@ export default function ProductGrid({ page = 1, query, filter, sort, order }: Pr
   const hasMore = visibleCount < result.length;
 
   return (
-    <section className="flex-1 overflow-y-auto pt-12">
-      <div className="mx-auto grid max-w-7xl grid-cols-4 gap-6 p-6">
+    <section className="flex-1 overflow-y-auto pt-5 md:pt-12">
+      <div className="mx-auto grid md:max-w-[90vw] xs:grid-cols-2 grid-cols-3 md:grid-cols-4 gap-6 lg:gap-12 p-6">
         {visibleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
