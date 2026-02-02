@@ -1,6 +1,6 @@
-import SearchBar from "./search.tsx";
-import Filter from "./filter.tsx";
-import Sort from "./sort.tsx";
+import SearchBar from "./search";
+import Filter from "./filter";
+import Sort from "./sort";
 
 export default function Toolbar() {
   return (

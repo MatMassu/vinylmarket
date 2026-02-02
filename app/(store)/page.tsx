@@ -1,8 +1,8 @@
 import "../globals.css";
-import Header from "../../components/header.tsx";
-import ProductGrid from "../../components/ProductGrid/product_grid.tsx";
-import Pagination from "/components/pagination.tsx";
-import Toolbar from "../../components/ProductToolbar/toolbar.tsx";
+import Header from "../../components/header";
+import ProductGrid from "../../components/ProductGrid/product_grid";
+import Pagination from "/components/pagination";
+import Toolbar from "../../components/ProductToolbar/toolbar";
 
 export default async function Page({
   searchParams,
@@ -11,6 +11,7 @@ export default async function Page({
     page?: string;
     query?: string;
     filter?: string;
+    1;
     sort?: string;
     order?: string;
   }>;

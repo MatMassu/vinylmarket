@@ -1,7 +1,7 @@
-import ModalWrapper from "../../../../../components/Modal/modal_wrapper.tsx";
-import VinylDetailsModal from "../../../../../components/VinylPage/vinyl_details_modal.tsx";
-import { CloseButton } from "../../../../../components/Modal/close_button.tsx";
-import { getVinylById } from "../../../../../lib/vinyls.ts";
+import ModalWrapper from "../../../../../components/Modal/modal_wrapper";
+import VinylDetailsModal from "../../../../../components/VinylPage/vinyl_details_modal";
+import { CloseButton } from "../../../../../components/Modal/close_button";
+import { getVinylById } from "../../../../../lib/vinyls";
 
 export default async function StoreVinylModal({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Product, products } from "../types/types.ts";
+import { Product, products } from "../types/types";
 
 export function getVinylById(id: string): Product {
   const vinyl = products.find((v) => v.id === id);

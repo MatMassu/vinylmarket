@@ -1,6 +1,6 @@
-import ProductCard from "./product_card.tsx";
-import { products } from "../../types/types.ts";
-import Pagination from "../pagination.tsx";
+import ProductCard from "./product_card";
+import { products } from "../../types/types";
+import Pagination from "../pagination";
 
 type SortOption = "price" | "artist";
 type OrderOption = "asc" | "desc";

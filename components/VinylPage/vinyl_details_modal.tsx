@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Product } from "/types/types.ts";
+import { Product } from "/types/types";
 
 type VinylDetailsProps = {
   vinyl: Product;
