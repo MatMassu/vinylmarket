@@ -7,7 +7,9 @@ export type Product = {
   image: string;
 };
 
-export const rawProducts: Product[] = [
+type RawProduct = Omit<Product, "image">;
+
+export const rawProducts: RawProduct[] = [
   { id: "vinyl-001", artist: "Miles Davis", title: "Kind of Blue", price: 29990, stock: 1 },
   {
     id: "vinyl-002",
