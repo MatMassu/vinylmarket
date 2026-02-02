@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/types/types.ts";
+import { Product } from "/types/types.ts";
 
 type ProductCardProps = {
   product: Product;

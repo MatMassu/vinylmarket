@@ -1,4 +1,4 @@
-# Vinyl Market (v0.6.0)
+# Vinyl Market (v0.6.1)
 
 **E-commerce de vinilos usados y de colección basado en Next.js**
 
@@ -22,6 +22,10 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 * [ ] Caching para persistencia de carrito.
 * [ ] Mejoras de seguridad y performance.
 
+### Fixes
+* [x] Diseño responsive: sitio para desktop y móvil (v0.6.0)
+* [x] SEO y accesibilidad: Modal con ruta paralela e intercepción (modal intercepta a página para vínilo) (v0.6.1)
+
 ## Metodología
 Este sítio está siendo construido tomando en cuenta todo lo aprendido en base a mis anteriores proyectos y estudio preliminar. 
 
@@ -33,4 +37,4 @@ Fundamentalmente:
 * Código siguiendo best practices de diseño web, clean code y principios SOLID.
 
 ## Tools & Stack
-Next.JS | React.js |TypeScript | TailwindCSS | PostgreSQL
+Next.js | React.js | TypeScript | TailwindCSS | PostgreSQL

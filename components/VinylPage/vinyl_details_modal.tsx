@@ -5,16 +5,16 @@ type VinylDetailsProps = {
   vinyl: Product;
 };
 
-export default function VinylDetails({ vinyl }: VinylDetailsProps) {
+export default function VinylDetailsModal({ vinyl }: VinylDetailsProps) {
   return (
-    <article className="flex flex-col min-h-screen text-center items-center justify-center gap-2">
+    <article className="flex flex-col text-center items-center justify-center gap-2">
       <div className="aspect-square">
         <Image
           src={vinyl.image}
           alt={`Portada de ${vinyl.title} - ${vinyl.artist}`}
           width={400}
           height={400}
-          className="w-full h-full"
+          className=""
         />
       </div>
       <div>

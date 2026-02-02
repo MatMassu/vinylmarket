@@ -20,7 +20,7 @@ export default function SearchBar() {
   }, 500);
 
   return (
-    <form role="search" className="flex h-10 w-screen md:w-70">
+    <form role="search" className="flex h-10 w-screen md:w-[50vw]">
       <label htmlFor="search" className="sr-only">
         Buscar vinilos (nombre o artista)
       </label>
