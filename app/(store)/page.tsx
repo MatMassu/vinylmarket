@@ -1,7 +1,7 @@
 import "../globals.css";
 import Header from "../../components/header";
 import ProductGrid from "../../components/ProductGrid/product_grid";
-import Pagination from "/components/pagination";
+import Pagination from "../../components/pagination";
 import Toolbar from "../../components/ProductToolbar/toolbar";
 
 export default async function Page({
