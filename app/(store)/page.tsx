@@ -11,7 +11,6 @@ export default async function Page({
     page?: string;
     query?: string;
     filter?: string;
-    1;
     sort?: string;
     order?: string;
   }>;
