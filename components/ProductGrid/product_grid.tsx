@@ -1,5 +1,5 @@
 import ProductCard from "./product_card.tsx";
-import { products } from "/types/types.ts";
+import { products } from "../../types/types.ts";
 import Pagination from "../pagination.tsx";
 
 type SortOption = "price" | "artist";

@@ -1,5 +1,5 @@
-import { getVinylById } from "/lib/vinyls.ts";
-import VinylDetails from "/components/VinylPage/vinyl_details.tsx";
+import { getVinylById } from "../../../lib/vinyls.ts";
+import VinylDetails from "../../../components/VinylPage/vinyl_details.tsx";
 
 export default async function VinylPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
