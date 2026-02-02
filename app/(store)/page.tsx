@@ -4,15 +4,18 @@ import ProductGrid from "../../components/ProductGrid/product_grid";
 import Pagination from "../../components/pagination";
 import Toolbar from "../../components/ProductToolbar/toolbar";
 
+type SortOption = "price" | "artist";
+type OrderOption = "asc" | "desc";
+
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<{
-    page?: string;
+    page?: number;
     query?: string;
     filter?: string;
-    sort?: string;
-    order?: string;
+    sort?: SortOption;
+    order?: OrderOption;
   }>;
 }) {
   const params = await searchParams;
