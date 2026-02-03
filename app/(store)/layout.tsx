@@ -1,5 +1,6 @@
 import "../globals.css";
 import React from "react";
+import { CartProvider } from "../../components/Cart/cart_context";
 
 export default function StoreLayout({
   children,
@@ -10,8 +11,10 @@ export default function StoreLayout({
 }) {
   return (
     <>
-      {children}
-      {modal}
+      <CartProvider>
+        {children}
+        {modal}
+      </CartProvider>
     </>
   );
 }

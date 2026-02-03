@@ -136,3 +136,14 @@ export const products: Product[] = rawProducts.map((product) => ({
   ...product,
   image: `https://picsum.photos/seed/${product.id}/400/400`,
 }));
+
+export type CartItem = Product & {
+  quantity: number;
+};
+
+export type CartContext = {
+  items: CartItem[];
+  addToCart: (product: Product) => void;
+  removeFromCart: (id: string) => void;
+  clearCart: () => void;
+};
