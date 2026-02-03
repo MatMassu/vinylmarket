@@ -19,7 +19,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             height={400}
             className="w-full h-full object-cover shadow-md cursor-pointer"
           />
-          <AddToCartButton product={product.id} />
+          <AddToCartButton product={product} />
         </div>
         <div className="text-xs md:text-base">
           <h1 className="font-semibold text-sm md:text-xl"> {product.title} </h1>
