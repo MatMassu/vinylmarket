@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "../Cart/cart_context";
-import Product from "../../types/types";
+import { Product } from "../../types/types";
 import { ShoppingCart } from "lucide-react";
 
 export default function AddToCartButton({ product }: { product: Product }) {
