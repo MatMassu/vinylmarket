@@ -13,7 +13,7 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<CartItems[]>([]);
+  const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
     const stored = localStorage.getItem("cart");
