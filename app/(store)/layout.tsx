@@ -12,7 +12,7 @@ export default function StoreLayout({
 }) {
   return (
     <>
-      <Header Cart />
+      <Header />
       {children}
       {modal}
     </>
