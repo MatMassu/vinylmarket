@@ -9,7 +9,10 @@ export default function SideCartButton() {
 
   return (
     <>
-      <button className="absolute right-10 scale-150" onClick={() => setOpen(true)}>
+      <button
+        className="absolute right-10 scale-120 md:scale-150 cursor-pointer"
+        onClick={() => setOpen(true)}
+      >
         <ShoppingCart className="stroke-white" />
       </button>
       <CartPanel open={open} onClose={() => setOpen(false)} />

@@ -1,4 +1,4 @@
-# Vinyl Market (v0.6.1)
+# Vinyl Market (v0.7.0)
 <a href=https://vinilomarket.vercel.app/>
 <img width="1227" height="821" alt="vinilomarket" src="https://github.com/user-attachments/assets/bdbb5e96-ce3c-41de-8dda-d0ab99e68850" />
 </a>
@@ -18,7 +18,7 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 * [x] Sorting alfabético y por precio. (v0.3.0)
 * [x] Paginación. (v0.5.0)
 * [x] Modal interactivo por vinilo con más detalles: descripción, tracklist, condición, y preview de calidad sonora. (v0.6.0)
-* [ ] Carrito dinámico y sistema de check-out con manejo de pagos y envío.
+* [x] Carrito dinámico y sistema de check-out con manejo de pagos y envío. (v0.7.0)
 
 ### Back-end
 * [ ] Conexión con base de datos.

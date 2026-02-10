@@ -1,5 +1,6 @@
 import "../globals.css";
 import React from "react";
+import Header from "../../components/header";
 import { CartProvider } from "../../components/Cart/cart_context";
 
 export default function StoreLayout({
@@ -11,10 +12,9 @@ export default function StoreLayout({
 }) {
   return (
     <>
-      <CartProvider>
-        {children}
-        {modal}
-      </CartProvider>
+      <Header Cart />
+      {children}
+      {modal}
     </>
   );
 }
