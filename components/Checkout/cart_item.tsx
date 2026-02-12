@@ -5,7 +5,11 @@ import { useCart } from "../../components/Cart/cart_context";
 import { getProductImages } from "../../lib/blob";
 import { CartItem } from "../../types/types";
 
-export default function CartItem({ item }: CartItem) {
+type CartItemProps = {
+  item: CartItem;
+};
+
+export default function CartItem({ item }: CartItemProps) {
   const { removeFromCart } = useCart();
   const image = getProductImages({ id: item.id, slug: item.slug, element: "frente" });
   return (
