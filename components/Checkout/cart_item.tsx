@@ -3,13 +3,9 @@
 import Image from "next/image";
 import { useCart } from "../../components/Cart/cart_context";
 import { getProductImages } from "../../lib/blob";
-import { Product } from "../../types/types";
+import { CartItem } from "../../types/types";
 
-type CartItemProps = {
-  item: Product;
-};
-
-export default function CartItem({ item }: CartItemProps) {
+export default function CartItem({ item }: CartItem) {
   const { removeFromCart } = useCart();
   const image = getProductImages({ id: item.id, slug: item.slug, element: "frente" });
   return (
