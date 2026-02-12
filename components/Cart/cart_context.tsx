@@ -1,10 +1,10 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { Product, CartItem } from "../../types/types";
+import { Product, CartItemType } from "../../types/types";
 
 type CartContextType = {
-  items: CartItem[];
+  items: CartItemType[];
   addToCart: (product: Product) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;

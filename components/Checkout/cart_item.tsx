@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useCart } from "../../components/Cart/cart_context";
 import { getProductImages } from "../../lib/blob";
-import { CartItem } from "../../types/types";
+import { CartItemType } from "../../types/types";
 
 type CartItemProps = {
-  item: CartItem;
+  item: CartItemType;
 };
 
 export default function CartItem({ item }: CartItemProps) {
