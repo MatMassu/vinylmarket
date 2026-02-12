@@ -31,10 +31,15 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
+      - name: Debug token
+        run: echo "Token present"
+        env:
+          TOKEN: ${{ github.token }}
+
       - name: Delete Deployment Environment
         if: success()
         uses: strumwolf/delete-deployment-environment@v3.0.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           environment: Production
           onlyRemoveDeployments: true
