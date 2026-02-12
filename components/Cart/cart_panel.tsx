@@ -6,7 +6,6 @@ import Link from "next/link";
 import clsx from "clsx";
 import { CloseButton } from "../Modal/close_button";
 import { X } from "lucide-react";
-import { getProductImages } from "../../lib/blob";
 import CartItem from "../Checkout/cart_item";
 
 type CartPanelProps = {
@@ -28,7 +27,6 @@ export default function CartPanel({ open, onClose }: CartPanelProps) {
 
   const { items, removeFromCart } = useCart();
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-  const images = getProductImages({ id: items.id, slug: items.slug, element: "frente" });
 
   return (
     <aside
