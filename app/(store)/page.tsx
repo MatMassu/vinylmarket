@@ -3,7 +3,6 @@ import ProductGrid from "../../components/ProductGrid/product_grid";
 import Pagination from "../../components/pagination";
 import Toolbar from "../../components/ProductToolbar/toolbar";
 import { getProducts } from "../../lib/queries/products";
-import { Product } from "../../types/types";
 
 type SortOption = "price" | "artist";
 type OrderOption = "asc" | "desc";
@@ -12,7 +11,6 @@ export default async function StorePage({
   searchParams,
 }: {
   searchParams: Promise<{
-    products: Product;
     page?: number;
     query?: string;
     filter?: string;

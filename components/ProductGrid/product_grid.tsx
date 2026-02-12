@@ -5,7 +5,7 @@ import Pagination from "../pagination";
 type SortOption = "price" | "artist";
 type OrderOption = "asc" | "desc";
 type ProductGridProps = {
-  products: Product;
+  products: Product[];
   page?: number;
   query?: string;
   filter?: string;
