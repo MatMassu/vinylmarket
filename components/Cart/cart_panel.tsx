@@ -6,6 +6,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { CloseButton } from "../Modal/close_button";
 import { X } from "lucide-react";
+import CartItem from "../Checkout/cart_item";
 
 type CartPanelProps = {
   open: boolean;
