@@ -1,5 +1,5 @@
 import ProductCard from "./product_card";
-import Product from "../../types/types";
+import { Product } from "../../types/types";
 import Pagination from "../pagination";
 
 type SortOption = "price" | "artist";
