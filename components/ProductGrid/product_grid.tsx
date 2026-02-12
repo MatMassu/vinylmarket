@@ -1,10 +1,11 @@
 import ProductCard from "./product_card";
-import { products } from "../../types/types";
+import Product from "../../types/types";
 import Pagination from "../pagination";
 
 type SortOption = "price" | "artist";
 type OrderOption = "asc" | "desc";
 type ProductGridProps = {
+  products: Product;
   page?: number;
   query?: string;
   filter?: string;
@@ -15,7 +16,14 @@ type ProductGridProps = {
 const PAGE_SIZE = 12;
 const compareStrings = (a: string, b: string, dir: number) => a.localeCompare(b) * dir;
 
-export default function ProductGrid({ page = 1, query, filter, sort, order }: ProductGridProps) {
+export default function ProductGrid({
+  products,
+  page = 1,
+  query,
+  filter,
+  sort,
+  order,
+}: ProductGridProps) {
   let result = [...products];
 
   if (query) {
@@ -50,7 +58,7 @@ export default function ProductGrid({ page = 1, query, filter, sort, order }: Pr
   const hasMore = visibleCount < result.length;
 
   return (
-    <section className="flex-1 overflow-y-auto pt-5 md:pt-12">
+    <section className="flex-1 overflow-y-auto py-5 md:py-12">
       <div className="mx-auto grid md:max-w-[90vw] xs:grid-cols-2 grid-cols-3 md:grid-cols-4 gap-6 lg:gap-12 p-6">
         {visibleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />

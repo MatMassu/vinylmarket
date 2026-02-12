@@ -1,12 +1,21 @@
+export type Grading = "NM" | "VG+" | "VG" | "G+" | "G" | "F" | "P";
+
 export type Product = {
-  id: string;
+  id: number;
+  slug: string;
   title: string;
   artist: string;
   price: number;
   stock: number;
-  image: string;
+  disc_count: number;
+  cover_condition: Grading;
+  disc_condition: Grading;
+  created_at: string;
+  updated_at: string;
 };
 
+{
+  /*
 type RawProduct = Omit<Product, "image">;
 
 export const rawProducts: RawProduct[] = [
@@ -136,6 +145,8 @@ export const products: Product[] = rawProducts.map((product) => ({
   ...product,
   image: `https://picsum.photos/seed/${product.id}/400/400`,
 }));
+*/
+}
 
 export type CartItem = Product & {
   quantity: number;

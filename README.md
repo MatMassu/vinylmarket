@@ -1,4 +1,4 @@
-# Vinyl Market (v0.7.0)
+# Vinyl Market (v0.9.0)
 <a href=https://vinilomarket.vercel.app/>
 <img width="1920" height="1007" alt="Screenshot_20260205_124906" src="https://github.com/user-attachments/assets/91bfba39-075b-4002-893a-574caa02ddb6" />
 </a>
@@ -21,13 +21,14 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 * [x] Carrito dinámico y sistema de check-out con manejo de pagos y envío. (v0.7.0)
 
 ### Back-end
-* [ ] Conexión con base de datos.
-* [ ] Caching para persistencia de carrito.
+* [x] Caching para persistencia de carrito. (v0.8.0)
+* [x] Conexión a base de datos Neon serverless e imagenes hosteadas con Vercel Blob. (v0.9.0)
 * [ ] Mejoras de seguridad y performance.
 
-### Fixes
-* [x] Diseño responsive: sitio para desktop y móvil (v0.6.0)
-* [x] SEO y accesibilidad: Modal con ruta paralela e intercepción (modal intercepta a página para vínilo) (v0.6.1)
+### Mejoras
+* [x] Diseño responsive: sitio para desktop y móvil. (v0.6.0)
+* [x] SEO y accesibilidad: Modal con ruta paralela e intercepción de página. (v0.6.1)
+* [x] Imágenes con tamaño adaptativo: carrito (96x96), grilla de productos (768x768), modal (1536x1536). (v0.9.0)
 
 ## Metodología
 Este sítio está siendo construido tomando en cuenta todo lo aprendido en base a mis anteriores proyectos y estudio preliminar. 

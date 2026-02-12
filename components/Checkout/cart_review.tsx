@@ -1,10 +1,10 @@
 "use client";
 
 import { useCart } from "../../components/Cart/cart_context";
-import Image from "next/image";
+import CartItem from "./cart_item";
 
 export default function CartReview() {
-  const { items, removeFromCart } = useCart();
+  const { items } = useCart();
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = items.length > 0 ? 3500 : 0;
   const total = subtotal + shipping;
@@ -19,38 +19,13 @@ export default function CartReview() {
       </h2>
 
       <div className="flex flex-col gap-5 flex-1">
-        <ul className="border border-gray-300 rounded-md overflow-y-scroll flex-1 min-h-50 max-h-[50vw] md:max-h-[40vw] lg:max-h-[25vw]">
+        <ul className="flex flex-col gap-4 px-2 py-4 border border-gray-300 rounded-md overflow-y-scroll flex-1 min-h-50 max-h-[50vw] md:max-h-[40vw] lg:max-h-[25vw]">
           {items.length === 0 ? (
             <div className="flex items-center h-full">
               <p className="text-gray-500 text-sm text-center w-full">Carrito vacio</p>
             </div>
           ) : (
-            <ul className="flex flex-col gap-4 px-2 py-4">
-              {items.map((item) => (
-                <li key={item.id} className="flex gap-2">
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-sm text-red-500 cursor-pointer hover:underline"
-                  >
-                    x
-                  </button>
-
-                  <Image
-                    src={item.image}
-                    alt={`Portada de ${item.title} - ${item.artist}`}
-                    width={80}
-                    height={80}
-                    className=""
-                  />
-
-                  <article className="flex flex-col justify-center-safe">
-                    <h3 className="font-medium">{item.title}</h3>
-                    <p className="text-sm text-gray-500">Cantidad: {item.quantity}</p>
-                    <p className="text-sm">${(item.price * item.quantity).toLocaleString()}</p>
-                  </article>
-                </li>
-              ))}
-            </ul>
+            items.map((item) => <CartItem key={item.id} item={item} />)
           )}
         </ul>
 

@@ -6,6 +6,8 @@ import Link from "next/link";
 import clsx from "clsx";
 import { CloseButton } from "../Modal/close_button";
 import { X } from "lucide-react";
+import { getProductImages } from "../../lib/blob";
+import CartItem from "../Checkout/cart_item";
 
 type CartPanelProps = {
   open: boolean;
@@ -26,6 +28,7 @@ export default function CartPanel({ open, onClose }: CartPanelProps) {
 
   const { items, removeFromCart } = useCart();
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const images = getProductImages({ id: items.id, slug: items.slug, element: "frente" });
 
   return (
     <aside
@@ -43,7 +46,7 @@ export default function CartPanel({ open, onClose }: CartPanelProps) {
       <section
         aria-label="Carrito"
         className={clsx(
-          "absolute right-0 top-0 h-full w-96 bg-white shadow-xl p-6 flex flex-col transition-transform duration-300",
+          "absolute right-0 top-0 h-full min-w-96 max-w-[50vw] bg-white shadow-xl p-6 flex flex-col transition-transform duration-300",
           open ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -53,30 +56,15 @@ export default function CartPanel({ open, onClose }: CartPanelProps) {
             <X />
           </button>
         </header>
-
-        <main className="flex-1 overflow-y-auto p-6">
+        <ul className="flex flex-col gap-4 px-2 py-4 overflow-y-scroll flex-1">
           {items.length === 0 ? (
-            <p className="text-gray-500 text-sm">Carrito vacio</p>
+            <div className="flex items-center h-full">
+              <p className="text-gray-500 text-sm text-center w-full">Carrito vacio</p>
+            </div>
           ) : (
-            <ul className="flex flex-col gap-4">
-              {items.map((item) => (
-                <li key={item.id} className="flex justify-between items-start border-b pb-2">
-                  <article>
-                    <h3 className="font-medium">{item.title}</h3>
-                    <p className="text-sm text-gray-500">Cantidad: {item.quantity}</p>
-                    <p className="text-sm">${item.price * item.quantity}</p>
-                  </article>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-sm text-red-500 hover:underline cursor-pointer"
-                  >
-                    Borrar
-                  </button>
-                </li>
-              ))}
-            </ul>
+            items.map((item) => <CartItem key={item.id} item={item} />)
           )}
-        </main>
+        </ul>
 
         <footer className="p-6 border-t space-y-4">
           <div className="flex justify-between font-semibold">
