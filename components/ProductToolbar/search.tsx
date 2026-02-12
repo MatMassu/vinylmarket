@@ -17,7 +17,7 @@ export default function SearchBar() {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 500);
+  }, 300);
 
   return (
     <form role="search" className="flex h-10 w-screen md:w-[50vw]">
