@@ -34,7 +34,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function removeFromCart(id: string) {
+  function removeFromCart(id: number) {
     setItems((prev) => prev.filter((i) => i.id !== id));
   }
 
