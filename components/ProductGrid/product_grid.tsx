@@ -2,28 +2,17 @@ import ProductCard from "./product_card";
 import { Product } from "../../types/types";
 import Pagination from "../pagination";
 
-type SortOption = "price" | "artist";
-type OrderOption = "asc" | "desc";
+type SortOption = "price-desc" | "price-asc";
 type ProductGridProps = {
   products: Product[];
   page?: number;
   query?: string;
-  filter?: string;
   sort?: SortOption;
-  order?: OrderOption;
 };
 
 const PAGE_SIZE = 12;
-const compareStrings = (a: string, b: string, dir: number) => a.localeCompare(b) * dir;
 
-export default function ProductGrid({
-  products,
-  page = 1,
-  query,
-  filter,
-  sort,
-  order,
-}: ProductGridProps) {
+export default function ProductGrid({ products, page = 1, query, sort }: ProductGridProps) {
   let result = [...products];
 
   if (query) {
@@ -32,20 +21,14 @@ export default function ProductGrid({
     );
   }
 
-  if (filter === "available") {
-    result = result.filter((product) => product.stock > 0);
-  }
-
   if (sort) {
     result = [...result].sort((a, b) => {
-      const dir = order === "asc" ? 1 : -1;
-
       switch (sort) {
-        case "price":
-          return (a.price - b.price) * dir;
+        case "price-desc":
+          return b.price - a.price;
           break;
-        case "artist":
-          return compareStrings(a.artist, b.artist, dir) || compareStrings(a.title, b.title, dir);
+        case "price-asc":
+          return a.price - b.price;
           break;
         default:
           return 0;
@@ -58,8 +41,8 @@ export default function ProductGrid({
   const hasMore = visibleCount < result.length;
 
   return (
-    <section className="flex-1 overflow-y-auto py-5 md:py-12">
-      <div className="mx-auto grid md:max-w-[90vw] xs:grid-cols-2 grid-cols-3 md:grid-cols-4 gap-6 lg:gap-12 p-6">
+    <section className="flex-1">
+      <div className="grid md:max-w-[90vw] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 mx-6 mb-6">
         {visibleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

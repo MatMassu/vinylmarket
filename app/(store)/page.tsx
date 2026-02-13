@@ -2,10 +2,10 @@ import "../globals.css";
 import ProductGrid from "../../components/ProductGrid/product_grid";
 import Pagination from "../../components/pagination";
 import Toolbar from "../../components/ProductToolbar/toolbar";
+import Filter from "../../components/ProductToolbar/filter";
 import { getProducts } from "../../lib/queries/products";
 
-type SortOption = "price" | "artist";
-type OrderOption = "asc" | "desc";
+type SortOption = "price-desc" | "price-asc";
 
 export default async function StorePage({
   searchParams,
@@ -13,25 +13,24 @@ export default async function StorePage({
   searchParams: Promise<{
     page?: number;
     query?: string;
-    filter?: string;
     sort?: SortOption;
-    order?: OrderOption;
   }>;
 }) {
   const params = await searchParams;
   const products = await getProducts();
 
   return (
-    <main className="flex min-h-screen flex-col bg-indigo-200">
-      <Toolbar />
-      <ProductGrid
-        products={products}
-        page={Number(params.page ?? 1)}
-        query={params.query}
-        filter={params.filter}
-        sort={params.sort}
-        order={params.order}
-      />
+    <main className="flex flex-col min-h-screen bg-white px-[clamp(0px,170px)]">
+      <Filter />
+      <div className="flex md:flex-row flex-col">
+        <Toolbar />
+        <ProductGrid
+          products={products}
+          page={Number(params.page ?? 1)}
+          query={params.query}
+          sort={params.sort}
+        />
+      </div>
     </main>
   );
 }

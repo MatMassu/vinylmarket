@@ -20,7 +20,7 @@ export default function SearchBar() {
   }, 300);
 
   return (
-    <form role="search" className="flex h-10 w-screen md:w-[50vw]">
+    <form role="search" className="flex h-10 w-full bg-white">
       <label htmlFor="search" className="sr-only">
         Buscar vinilos (nombre o artista)
       </label>
@@ -28,8 +28,8 @@ export default function SearchBar() {
         id="search"
         type="search"
         name="query"
-        placeholder="Buscar vinilos (nombre o artista)"
-        className="w-full px-2 text-center md:text-left focus:outline-none"
+        placeholder="Buscar..."
+        className="p-4 text-center w-full md:text-left mx-4 focus:outline-none border border-black/20 rounded-xl"
         onChange={(e) => {
           handleSearch(e.target.value);
         }}

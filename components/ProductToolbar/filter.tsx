@@ -1,51 +1,54 @@
 "use client";
 
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function Filter() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const isChecked = searchParams.get("filter") === "available";
+  const sortFromUrl = searchParams.get("sort") ?? "";
 
-  function handleChange(checked: boolean) {
+  const [sort, setSort] = useState(sortFromUrl);
+
+  useEffect(() => {
+    setSort(sortFromUrl);
+  }, [sortFromUrl]);
+
+  function handleSort(option: string) {
     const params = new URLSearchParams(searchParams);
-    if (checked) {
-      params.set("filter", "available");
+
+    if (option) {
+      params.set("sort", option);
     } else {
-      params.delete("filter");
+      params.delete("sort");
     }
+
     replace(`${pathname}?${params.toString()}`);
   }
 
   return (
-    <form role="filter" className="flex items-center h-10 gap-3 md:gap-0 text-sm">
-      <label htmlFor="available" className="flex items-center gap-1 cursor-pointer md:pr-4">
-        <input
-          type="checkbox"
-          id="available"
-          value="available"
-          checked={isChecked}
-          onChange={(e) => handleChange(e.target.checked)}
-        />
-        <span>Solo disponibles</span>
-      </label>
-      <button
-        type="button"
-        className="cursor-pointer hover:underline md:pr-5 pr-3"
-        onClick={() => {
-          const params = new URLSearchParams(searchParams);
-          params.delete("query");
-          params.delete("filter");
-          params.delete("sort");
-          params.delete("page");
-          params.delete("order");
-          replace(`${pathname}?${params.toString()}`);
-        }}
-      >
-        Limpiar filtros
-      </button>
-    </form>
+    <div className="flex text-sm gap-2 w-full justify-end px-10">
+      <form role="sort" className="flex items-center h-10 ">
+        <label htmlFor="sort" className="mx-2 text-gray-500">
+          Ordenar por:
+        </label>
+
+        <select
+          id="sort"
+          value={sort}
+          onChange={(e) => {
+            const value = e.target.value;
+            setSort(value);
+            handleSort(value);
+          }}
+        >
+          <option value="">Más relevantes</option>
+          <option value="price-desc">Mayor precio</option>
+          <option value="price-asc">Menor precio</option>
+        </select>
+      </form>
+    </div>
   );
 }

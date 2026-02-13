@@ -7,9 +7,15 @@ type HeaderProps = {
 
 export default function Header({ showCartButton = true }: HeaderProps) {
   return (
-    <header className="flex relative h-20 items-center justify-center bg-blue-900">
+    <header
+      className="flex relative h-30 items-center justify-center 
+      bg-linear-to-b from-gray-800 to-gray-600 shadow-xl mb-10"
+    >
       <Link href="/">
-        <h1 className="text-4xl text-white font-serif tracking-wider select-none cursor-pointer">
+        <h1
+          className="text-4xl text-white font-serif hover:scale-[1.015] 
+           duration-300 transform translate-all tracking-wider select-none cursor-pointer"
+        >
           Vinilo Market
         </h1>
       </Link>
