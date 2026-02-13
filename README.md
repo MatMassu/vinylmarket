@@ -1,6 +1,6 @@
-# Vinyl Market (v0.9.0)
+# Vinyl Market (v0.9.1)
 <a href=https://vinilomarket.vercel.app/>
-<img width="1920" height="1004" alt="Screenshot_20260212_171834" src="https://github.com/user-attachments/assets/679aa170-748f-4153-8f0d-3c48d9d2e0b2" />
+<img width="1915" height="1003" alt="Screenshot_20260213_194705" src="https://github.com/user-attachments/assets/e424277a-b899-449a-ae6d-d183525a1224" />
 </a>
 
 **E-commerce de vinilos usados y de colección basado en Next.js**
