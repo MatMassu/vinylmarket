@@ -20,7 +20,7 @@ export default async function StorePage({
   const products = await getProducts();
 
   return (
-    <main className="flex flex-col min-h-screen bg-white px-[clamp(0px,170px)]">
+    <main className="flex flex-col min-h-screen bg-linear-to-b from-stone-50 to-stone-100 pt-10 px-[clamp(0px,170px)]">
       <Filter />
       <div className="flex md:flex-row flex-col">
         <Toolbar />

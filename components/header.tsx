@@ -9,7 +9,7 @@ export default function Header({ showCartButton = true }: HeaderProps) {
   return (
     <header
       className="flex relative h-30 items-center justify-center 
-      bg-linear-to-b from-gray-800 to-gray-600 shadow-xl mb-10"
+      bg-slate-900/80 shadow-sm"
     >
       <Link href="/">
         <h1

@@ -42,7 +42,7 @@ export default function ProductGrid({ products, page = 1, query, sort }: Product
 
   return (
     <section className="flex-1">
-      <div className="grid md:max-w-[90vw] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 mx-6 mb-6">
+      <div className="grid md:max-w-[90vw] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 mx-6 mb-6">
         {visibleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

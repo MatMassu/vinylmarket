@@ -30,7 +30,7 @@ export default function Filter() {
 
   return (
     <div className="flex text-sm gap-2 w-full justify-end px-10">
-      <form role="sort" className="flex items-center h-10 ">
+      <form role="sort" className="flex items-center h-10">
         <label htmlFor="sort" className="mx-2 text-gray-500">
           Ordenar por:
         </label>
@@ -38,6 +38,7 @@ export default function Filter() {
         <select
           id="sort"
           value={sort}
+          className="cursor-pointer"
           onChange={(e) => {
             const value = e.target.value;
             setSort(value);
