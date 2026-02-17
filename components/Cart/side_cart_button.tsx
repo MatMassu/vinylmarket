@@ -10,10 +10,10 @@ export default function SideCartButton() {
   return (
     <>
       <button
-        className="absolute right-10 scale-120 md:scale-150 cursor-pointer"
+        className="absolute right-10 scale-120 md:scale-150 cursor-pointer "
         onClick={() => setOpen(true)}
       >
-        <ShoppingCart className="stroke-white" />
+        <ShoppingCart className="stroke-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] hover:scale-[1.1] transition-all duration-300" />
       </button>
       <CartPanel open={open} onClose={() => setOpen(false)} />
     </>

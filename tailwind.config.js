@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["var(--font-manrope)"],
-        serif: ["var(--font-spectral)"],
+        montserrat: ["var(--font-montserrat)"],
       },
     },
   },

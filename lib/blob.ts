@@ -13,3 +13,9 @@ export function getProductImages({ id, slug, element }: getProductImagesProps) {
     modal: `${base}/modal/${id}_${slug}_${element}_modal.webp`,
   };
 }
+
+export function getMediaImages() {
+  return {
+    header: `media/header.jpg`,
+  };
+}

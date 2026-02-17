@@ -8,11 +8,21 @@ type ProductGridProps = {
   page?: number;
   query?: string;
   sort?: SortOption;
+  minCondition?: number;
+  maxCondition?: number;
 };
 
 const PAGE_SIZE = 12;
+const CONDITION_SCALE = ["P", "F", "G", "G+", "VG", "VG+", "NM"] as const;
 
-export default function ProductGrid({ products, page = 1, query, sort }: ProductGridProps) {
+export default function ProductGrid({
+  products,
+  page = 1,
+  query,
+  sort,
+  minCondition = 0,
+  maxCondition = 6,
+}: ProductGridProps) {
   let result = [...products];
 
   if (query) {
@@ -20,6 +30,11 @@ export default function ProductGrid({ products, page = 1, query, sort }: Product
       `${product.artist} ${product.title}`.toLowerCase().includes(query.toLowerCase())
     );
   }
+
+  result = result.filter((product) => {
+    const value = CONDITION_SCALE.indexOf(product.cover_condition);
+    return value >= minCondition && value <= maxCondition;
+  });
 
   if (sort) {
     result = [...result].sort((a, b) => {
@@ -42,7 +57,7 @@ export default function ProductGrid({ products, page = 1, query, sort }: Product
 
   return (
     <section className="flex-1">
-      <div className="grid md:max-w-[90vw] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 mx-6 mb-6">
+      <div className="grid md:max-w-[90vw] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-6 mb-6">
         {visibleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -50,7 +65,8 @@ export default function ProductGrid({ products, page = 1, query, sort }: Product
       {hasMore && <Pagination />}
       {visibleProducts.length == 0 && (
         <div className="flex w-full justify-center">
-          No se encontraron resultados para "{query}"
+          {query && `No se encontraron resultados para "${query}"`}
+          {!query && "No se encontraron resultados. Intente con otros filtros."}
         </div>
       )}
     </section>

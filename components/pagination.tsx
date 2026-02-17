@@ -16,10 +16,10 @@ export default function Pagination() {
   }
 
   return (
-    <form className="flex justify-center mb-100">
+    <form className="flex justify-center mt-20 mb-70">
       <button
         type="button"
-        className="border rounded p-2 cursor-pointer bg-white hover:scale-105 hover:shadow-md transition-all active:scale-99 active:shadow-xs"
+        className="rounded p-2 cursor-pointer shadow-sm bg-white hover:scale-105 hover:shadow-md transition-all active:scale-99 active:shadow-xs"
         onClick={handlePagination}
       >
         Ver más...

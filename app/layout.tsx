@@ -1,12 +1,12 @@
 import "./globals.css";
 import React from "react";
-import { Spectral, Manrope } from "next/font/google";
+import { Montserrat, Manrope } from "next/font/google";
 import { CartProvider } from "../components/Cart/cart_context";
 
-const spectral = Spectral({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-spectral",
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-montserrat",
 });
 
 const manrope = Manrope({
@@ -16,7 +16,7 @@ const manrope = Manrope({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${spectral.variable} ${manrope.variable}`}>
+    <html lang="es" className={`${montserrat.variable} ${manrope.variable}`}>
       <body className="font-sans">
         <CartProvider>{children}</CartProvider>
       </body>

@@ -29,7 +29,7 @@ export default function SearchBar() {
         type="search"
         name="query"
         placeholder="Buscar..."
-        className="p-4 text-center w-full md:text-left mx-4 focus:outline-none rounded-lg shadow-sm focus:ring-2 focus:ring-neutral-300/30 transition-all"
+        className="p-4 text-center w-full md:text-left focus:outline-none rounded-lg shadow-sm focus:ring-2 focus:ring-neutral-300/30 transition-all"
         onChange={(e) => {
           handleSearch(e.target.value);
         }}

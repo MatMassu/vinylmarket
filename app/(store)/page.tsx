@@ -14,6 +14,8 @@ export default async function StorePage({
     page?: number;
     query?: string;
     sort?: SortOption;
+    minCondition?: number;
+    maxCondition?: number;
   }>;
 }) {
   const params = await searchParams;
@@ -29,6 +31,8 @@ export default async function StorePage({
           page={Number(params.page ?? 1)}
           query={params.query}
           sort={params.sort}
+          minCondition={Number(params.minCondition ?? 0)}
+          maxCondition={Number(params.maxCondition ?? 6)}
         />
       </div>
     </main>

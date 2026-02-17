@@ -1,20 +1,24 @@
 import SideCartButton from "./Cart/side_cart_button";
 import Link from "next/link";
+import Image from "next/image";
+import { getMediaImages } from "../lib/blob";
 
 type HeaderProps = {
   showCartButton?: boolean;
 };
 
 export default function Header({ showCartButton = true }: HeaderProps) {
+  const images = getMediaImages();
   return (
     <header
-      className="flex relative h-30 items-center justify-center 
-      bg-slate-900/80 shadow-sm"
+      className="flex relative h-30 items-center justify-center shadow-md"
+      style={{ backgroundImage: `url(${images.header})` }}
     >
       <Link href="/">
         <h1
-          className="text-4xl text-white font-serif hover:scale-[1.015] 
-           duration-300 transform translate-all tracking-wider select-none cursor-pointer"
+          className="text-4xl xl:text-5xl text-white font-serif hover:scale-[1.05] 
+            drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]
+            duration-300 transform translate-all tracking-wider select-none cursor-pointer"
         >
           Vinilo Market
         </h1>
