@@ -16,6 +16,6 @@ export function getProductImages({ id, slug, element }: getProductImagesProps) {
 
 export function getMediaImages() {
   return {
-    header: `media/header.jpg`,
+    header: `https://kccbcw6rqngvsspk.public.blob.vercel-storage.com/media/header.jpg`,
   };
 }
