@@ -6,7 +6,7 @@ export default async function VinylPage({ params }: { params: Promise<{ id: stri
   const product = await getProductById(Number(id));
 
   return (
-    <main className="flex min-h-screen flex-col bg-indigo-200">
+    <main className="flex min-h-screen flex-col">
       <VinylDetails vinyl={product} />
     </main>
   );

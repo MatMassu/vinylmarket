@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useCart } from "../../components/Cart/cart_context";
-import { getProductImages } from "../../lib/blob";
 import { CartItemType } from "../../types/types";
+import Image from "next/image";
 
 type CartItemProps = {
   item: CartItemType;
@@ -11,7 +10,6 @@ type CartItemProps = {
 
 export default function CartItem({ item }: CartItemProps) {
   const { removeFromCart } = useCart();
-  const image = getProductImages({ id: item.id, slug: item.slug, element: "frente" });
   return (
     <>
       <li key={item.id} className="flex gap-2">
@@ -21,10 +19,9 @@ export default function CartItem({ item }: CartItemProps) {
         >
           x
         </button>
-
         <Image
-          src={image.cart}
-          alt={`Portada de ${item.title} - ${item.artist}`}
+          src={item.images.cart}
+          alt={`test`}
           width={80}
           height={80}
           className="w-23 h-23 object-cover shrink-0 shadow-md"

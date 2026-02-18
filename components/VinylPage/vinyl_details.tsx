@@ -1,24 +1,14 @@
-import Image from "next/image";
 import { Product } from "../../types/types";
-import { getProductImages } from "../../lib/blob";
+import VinylImagesWrapper from "./vinyl_images_wrapper";
 
 type VinylDetailsProps = {
   vinyl: Product;
 };
 
-export default function VinylDetails({ vinyl }: VinylDetailsProps) {
-  const image = getProductImages({ id: vinyl.id, slug: vinyl.slug, element: "frente" });
+export default function VinylDetailsModal({ vinyl }: VinylDetailsProps) {
   return (
     <article className="flex flex-col min-h-screen text-center items-center justify-center gap-2">
-      <div className="aspect-square">
-        <Image
-          src={image.modal}
-          alt={`Portada de ${vinyl.title} - ${vinyl.artist}`}
-          width={400}
-          height={400}
-          className="w-full h-full"
-        />
-      </div>
+      <VinylImagesWrapper id={vinyl.id} />
       <div>
         <h1 className="font-semibold"> {vinyl.title} </h1>
         <h2> {vinyl.artist}</h2>

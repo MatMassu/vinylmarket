@@ -1,17 +1,37 @@
-type getProductImagesProps = {
-  id: number;
-  slug: string;
-  element: string;
-};
+import { sql } from "./db";
+import { ProductImages } from "../types/types";
 
-export function getProductImages({ id, slug, element }: getProductImagesProps) {
-  const base = "https://kccbcw6rqngvsspk.public.blob.vercel-storage.com";
+export async function getFrontImages(productId: number): Promise<ProductImages[]> {
+  try {
+    const result = await sql`
+    SELECT *
+    FROM product_images
+    WHERE product_id = ${productId}
+      AND type = 'frente'
+      AND variant IN ('grid', 'cart')
+  `;
 
-  return {
-    cart: `${base}/cart/${id}_${slug}_${element}_cart.webp`,
-    grid: `${base}/grid/${id}_${slug}_${element}_grid.webp`,
-    modal: `${base}/modal/${id}_${slug}_${element}_modal.webp`,
-  };
+    return result as ProductImages[];
+  } catch (err) {
+    console.error("DB ERROR:", err);
+    throw err;
+  }
+}
+
+export async function getModalImages(productId: number): Promise<ProductImages[]> {
+  try {
+    const result = await sql`
+    SELECT *
+    FROM product_images
+    WHERE product_id = ${productId}
+      AND variant = 'modal'
+  `;
+
+    return result as ProductImages[];
+  } catch (err) {
+    console.error("DB ERROR:", err);
+    throw err;
+  }
 }
 
 export function getMediaImages() {

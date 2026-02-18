@@ -1,11 +1,11 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { Product, CartItemType } from "../../types/types";
+import { Product, CartItemType, CartImageVariants } from "../../types/types";
 
 type CartContextType = {
   items: CartItemType[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, images: CartImageVariants) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
 };
@@ -24,13 +24,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("cart", JSON.stringify(items));
   }, [items]);
 
-  function addToCart(product: Product) {
+  function addToCart(product: Product, images: CartImageVariants) {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === product.id);
       if (existing) {
         return prev.map((i) => (i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i));
       }
-      return [...prev, { ...product, quantity: 1 }];
+      return [...prev, { ...product, quantity: 1, images }];
     });
   }
 

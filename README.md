@@ -1,4 +1,4 @@
-# Vinyl Market (v0.9.2)
+# Vinyl Market (v0.9.3)
 <a href=https://vinilomarket.vercel.app/>
 <img width="1920" height="1005" alt="image" src="https://github.com/user-attachments/assets/00e8731c-e407-44cb-a40d-e84b5258022d" />
 </a>
@@ -28,7 +28,7 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 ### Mejoras
 * [x] Diseño responsive: sitio para desktop y móvil. (v0.6.0)
 * [x] SEO y accesibilidad: Modal con ruta paralela e intercepción de página. (v0.6.1)
-* [x] Imágenes con tamaño adaptativo: carrito (96x96), grilla de productos (768x768), modal (1536x1536). (v0.9.0)
+* [x] Imágenes con tamaño adaptativo: carrito (96x96), grilla de productos (768x768), y modal (1536x1536). (v0.9.0)
 
 ## Metodología
 Este sítio está siendo construido tomando en cuenta todo lo aprendido en base a mis anteriores proyectos y estudio preliminar. 
