@@ -2,17 +2,17 @@ import { Product } from "../../types/types";
 import VinylImagesWrapper from "./vinyl_images_wrapper";
 
 type VinylDetailsProps = {
-  vinyl: Product;
+  product: Product;
 };
 
-export default function VinylDetailsModal({ vinyl }: VinylDetailsProps) {
+export default function VinylDetailsModal({ product }: VinylDetailsProps) {
   return (
     <article className="flex flex-col text-center items-center justify-center gap-2">
-      <VinylImagesWrapper id={vinyl.id} />
+      <VinylImagesWrapper id={product.id} />
       <div>
-        <h1 className="font-semibold"> {vinyl.title} </h1>
-        <h2> {vinyl.artist}</h2>
-        <p> ${vinyl.price} </p>
+        <h1 className="font-semibold"> {product.title} </h1>
+        <h2> {product.artist}</h2>
+        <p> ${product.price} </p>
       </div>
     </article>
   );

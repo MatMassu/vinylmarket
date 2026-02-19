@@ -10,7 +10,7 @@ export default async function StoreVinylModal({ params }: { params: Promise<{ id
   return (
     <ModalWrapper>
       <CloseButton />
-      <VinylDetailsModal vinyl={product} />
+      <VinylDetailsModal product={product} />
     </ModalWrapper>
   );
 }

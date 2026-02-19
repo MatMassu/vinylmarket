@@ -12,7 +12,7 @@ export default function CartItem({ item }: CartItemProps) {
   const { removeFromCart } = useCart();
   return (
     <>
-      <li key={item.id} className="flex gap-2">
+      <li className="flex gap-2">
         <button
           onClick={() => removeFromCart(item.id)}
           className="text-sm text-red-500 cursor-pointer hover:underline"

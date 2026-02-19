@@ -1,15 +1,16 @@
 "use client";
 
 import { useCart } from "../Cart/cart_context";
-import { Product, CartImageVariants } from "../../types/types";
+import { ProductCardView, CartImageVariants } from "../../types/types";
 import { ShoppingCart } from "lucide-react";
 
 type AddToCartButtonProps = {
-  product: Product;
+  product: ProductCardView;
   images: CartImageVariants;
+  disabled: boolean;
 };
 
-export default function AddToCartButton({ product, images }: AddToCartButtonProps) {
+export default function AddToCartButton({ product, images, disabled }: AddToCartButtonProps) {
   const { addToCart } = useCart();
   return (
     <button

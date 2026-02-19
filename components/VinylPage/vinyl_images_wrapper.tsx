@@ -1,4 +1,4 @@
-import { getModalImages } from "../../lib/blob";
+import { getModalImagesView } from "../../lib/blob";
 import VinylImages from "./vinyl_images";
 
 type VinylImagesWrapperProps = {
@@ -6,10 +6,8 @@ type VinylImagesWrapperProps = {
 };
 
 export default async function VinylImagesWrapper({ id }: VinylImagesWrapperProps) {
-  const result = await getModalImages(id);
-  const modalImages = result;
+  const modalView = await getModalImagesView(id);
+  if (!modalView) return null;
 
-  if (!modalImages.length) return null;
-
-  return <VinylImages images={modalImages}></VinylImages>;
+  return <VinylImages images={modalView.images}></VinylImages>;
 }

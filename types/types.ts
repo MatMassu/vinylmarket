@@ -39,7 +39,28 @@ export type CartImageVariants = {
   cart: string;
 };
 
-export type CartItemType = Product & {
+export type ProductCardView = {
+  id: number;
+  slug: string;
+  title: string;
+  artist: string;
+  price: number;
+  formattedPrice: string;
+  stock: number;
+  inStock: boolean;
+  cover_condition: Grading;
+  disc_condition: Grading;
+  images: {
+    grid: string;
+    cart: string;
+  };
+};
+
+export type CartItemType = ProductCardView & {
   quantity: number;
   images: CartImageVariants;
+};
+
+export type ModalImagesView = {
+  images: string[];
 };

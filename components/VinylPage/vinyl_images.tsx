@@ -1,15 +1,18 @@
 "use client";
 
-import { ProductImages } from "../../types/types";
+import { ModalImagesView } from "../../types/types";
 import Image from "next/image";
 import { useState } from "react";
 
 type VinylImagesProps = {
-  images: ProductImages[];
+  images: string[];
 };
 
 export default function VinylImages({ images }: VinylImagesProps) {
   const [index, setIndex] = useState(0);
+
+  if (!images?.length) return null;
+
   const currentImage = images[index];
 
   function prevImage() {
@@ -32,7 +35,7 @@ export default function VinylImages({ images }: VinylImagesProps) {
       )}
 
       <Image
-        src={currentImage.url}
+        src={currentImage}
         alt={`test`}
         width={400}
         height={400}

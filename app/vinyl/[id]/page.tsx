@@ -7,7 +7,7 @@ export default async function VinylPage({ params }: { params: Promise<{ id: stri
 
   return (
     <main className="flex min-h-screen flex-col">
-      <VinylDetails vinyl={product} />
+      <VinylDetails product={product} />
     </main>
   );
 }

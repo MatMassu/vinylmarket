@@ -1,10 +1,10 @@
 import ProductCard from "./product_card";
-import { Product } from "../../types/types";
+import { ProductCardView } from "../../types/types";
 import Pagination from "../pagination";
 
 type SortOption = "price-desc" | "price-asc";
 type ProductGridProps = {
-  products: Product[];
+  products: ProductCardView[];
   page?: number;
   query?: string;
   sort?: SortOption;

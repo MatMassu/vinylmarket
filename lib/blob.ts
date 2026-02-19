@@ -1,9 +1,9 @@
 import { sql } from "./db";
-import { ProductImages } from "../types/types";
+import { ProductImages, ModalImagesView } from "../types/types";
 
 export async function getFrontImages(productId: number): Promise<ProductImages[]> {
   try {
-    const result = await sql`
+    const rows = await sql`
     SELECT *
     FROM product_images
     WHERE product_id = ${productId}
@@ -11,7 +11,7 @@ export async function getFrontImages(productId: number): Promise<ProductImages[]
       AND variant IN ('grid', 'cart')
   `;
 
-    return result as ProductImages[];
+    return rows as ProductImages[];
   } catch (err) {
     console.error("DB ERROR:", err);
     throw err;
@@ -20,18 +20,28 @@ export async function getFrontImages(productId: number): Promise<ProductImages[]
 
 export async function getModalImages(productId: number): Promise<ProductImages[]> {
   try {
-    const result = await sql`
+    const rows = await sql`
     SELECT *
     FROM product_images
     WHERE product_id = ${productId}
       AND variant = 'modal'
   `;
 
-    return result as ProductImages[];
+    return rows as ProductImages[];
   } catch (err) {
     console.error("DB ERROR:", err);
     throw err;
   }
+}
+
+export async function getModalImagesView(productId: number): Promise<ModalImagesView | null> {
+  const rows = await getModalImages(productId);
+
+  const images = rows.map((img) => img.url);
+
+  return {
+    images,
+  };
 }
 
 export function getMediaImages() {
