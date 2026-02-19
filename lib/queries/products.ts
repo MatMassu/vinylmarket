@@ -53,7 +53,7 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
         p.title,
         p.artist,
         p.price,
-        p.stock
+        p.stock,
         p.cover_condition,
         p.disc_condition
       ORDER BY p.id
