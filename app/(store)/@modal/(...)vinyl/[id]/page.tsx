@@ -5,7 +5,7 @@ import { getProductById } from "../../../../../lib/queries/products";
 
 export default async function StoreVinylModal({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = await getProductById(Number(id));
+  const product = await getProductById(id);
 
   return (
     <ModalWrapper>

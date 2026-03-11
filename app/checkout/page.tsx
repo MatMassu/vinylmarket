@@ -1,6 +1,7 @@
 import Contact from "../../components/Checkout/contact";
 import CartReview from "../../components/Checkout/cart_review";
 import Shipping from "../../components/Checkout/shipping";
+import CheckoutButton from "../../components/Checkout/checkout_button";
 import Link from "next/link";
 
 export default function Checkout() {
@@ -21,9 +22,7 @@ export default function Checkout() {
         <CartReview />
         <Shipping />
       </article>
-      <button className="bg-blue-900 font-semibold text-md w-full p-2 text-white rounded-lg cursor-pointer hover:opacity-70 active:scale-98 active:scale-y-95 transform transition-all">
-        Continuar
-      </button>
+      <CheckoutButton />
     </main>
   );
 }

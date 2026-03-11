@@ -62,8 +62,8 @@ export default function ConditionFilter() {
           <Slider.Range className="absolute rounded-full h-full shadow-sm bg-transparent" />
         </Slider.Track>
 
-        <Slider.Thumb className="block w-4 h-4 bg-white border border-neutral-400 rounded-full shadow" />
-        <Slider.Thumb className="block w-4 h-4 bg-white border border-neutral-400 rounded-full shadow" />
+        <Slider.Thumb className="block w-4 h-4 bg-white border border-neutral-400 rounded-full shadow focus:scale-120 transition-all duration-200" />
+        <Slider.Thumb className="block w-4 h-4 bg-white border border-neutral-400 rounded-full shadow focus:scale-120 transition-all duration-200" />
       </Slider.Root>
 
       <div className="flex justify-between text-xs mt-2 text-neutral-500">

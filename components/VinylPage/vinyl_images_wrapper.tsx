@@ -2,7 +2,7 @@ import { getModalImagesView } from "../../lib/blob";
 import VinylImages from "./vinyl_images";
 
 type VinylImagesWrapperProps = {
-  id: number;
+  id: string;
 };
 
 export default async function VinylImagesWrapper({ id }: VinylImagesWrapperProps) {

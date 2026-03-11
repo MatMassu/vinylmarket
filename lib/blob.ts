@@ -1,7 +1,7 @@
 import { sql } from "./db";
 import { ProductImages, ModalImagesView } from "../types/types";
 
-export async function getFrontImages(productId: number): Promise<ProductImages[]> {
+export async function getFrontImages(productId: string): Promise<ProductImages[]> {
   try {
     const rows = await sql`
     SELECT *
@@ -18,7 +18,7 @@ export async function getFrontImages(productId: number): Promise<ProductImages[]
   }
 }
 
-export async function getModalImages(productId: number): Promise<ProductImages[]> {
+export async function getModalImages(productId: string): Promise<ProductImages[]> {
   try {
     const rows = await sql`
     SELECT *
@@ -34,7 +34,7 @@ export async function getModalImages(productId: number): Promise<ProductImages[]
   }
 }
 
-export async function getModalImagesView(productId: number): Promise<ModalImagesView | null> {
+export async function getModalImagesView(productId: string): Promise<ModalImagesView | null> {
   const rows = await getModalImages(productId);
 
   const images = rows.map((img) => img.url);

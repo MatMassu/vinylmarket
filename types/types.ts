@@ -1,7 +1,7 @@
 export type Grading = "NM" | "VG+" | "VG" | "G+" | "G" | "F" | "P";
 
 export type Product = {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   artist: string;
@@ -16,7 +16,7 @@ export type Product = {
 
 export type ProductImages = {
   id: number;
-  product_id: number;
+  product_id: string;
   type: ImageType;
   variant: ImageVariant;
   url: string;
@@ -40,7 +40,7 @@ export type CartImageVariants = {
 };
 
 export type ProductCardView = {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   artist: string;
@@ -64,3 +64,10 @@ export type CartItemType = ProductCardView & {
 export type ModalImagesView = {
   images: string[];
 };
+
+export type OrderStatus =
+  | "pending"
+  | "paid"
+  | "failed"
+  | "expired"
+  | "cancelled";

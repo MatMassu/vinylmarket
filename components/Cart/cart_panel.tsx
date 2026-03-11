@@ -31,7 +31,7 @@ export default function CartPanel({ open, onClose }: CartPanelProps) {
   return (
     <aside
       aria-hidden={!open}
-      className={clsx("fixed inset-0 z-50", !open && "pointer-events-none")}
+      className={clsx("fixed inset-0 z-50 ", !open && "pointer-events-none")}
     >
       <button
         aria-label="Cerrar carrito"
@@ -44,7 +44,7 @@ export default function CartPanel({ open, onClose }: CartPanelProps) {
       <section
         aria-label="Carrito"
         className={clsx(
-          "absolute right-0 top-0 h-full min-w-96 max-w-[50vw] bg-white shadow-xl p-6 flex flex-col transition-transform duration-300",
+          "absolute right-0 top-0 h-full w-full md:w-[40vw] bg-white shadow-xl p-6 flex flex-col transition-transform duration-300",
           open ? "translate-x-0" : "translate-x-full"
         )}
       >

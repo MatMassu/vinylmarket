@@ -3,7 +3,7 @@ import VinylDetails from "../../../components/VinylPage/vinyl_details";
 
 export default async function VinylPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = await getProductById(Number(id));
+  const product = await getProductById(id);
 
   return (
     <main className="flex min-h-screen flex-col">

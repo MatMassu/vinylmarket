@@ -28,9 +28,9 @@ export default function CartItem({ item }: CartItemProps) {
         />
 
         <article className="flex flex-col justify-center">
-          <h3 className="text-sm lg:text-base font-medium">{item.title}</h3>
-          <p className="text-xs lg:text-sm text-gray-500">Cantidad: {item.quantity}</p>
-          <p className="text-xs lg:text-sm">${(item.price * item.quantity).toLocaleString()}</p>
+          <h3 className="text-sm xl:text-base font-medium">{item.title}</h3>
+          <p className="text-xs xl:text-sm text-gray-500">Cantidad: {item.quantity}</p>
+          <p className="text-xs xl:text-sm">${(item.price * item.quantity).toLocaleString()}</p>
         </article>
       </li>
     </>

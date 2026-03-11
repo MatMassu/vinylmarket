@@ -39,7 +39,7 @@ export default function VinylImages({ images }: VinylImagesProps) {
         alt={`test`}
         width={400}
         height={400}
-        className="aspect-square touch-pinch-zoom"
+        className="aspect-square"
       />
 
       {images.length > 1 && (

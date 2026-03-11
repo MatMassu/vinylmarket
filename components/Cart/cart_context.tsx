@@ -6,7 +6,7 @@ import { ProductCardView, CartItemType, CartImageVariants } from "../../types/ty
 type CartContextType = {
   items: CartItemType[];
   addToCart: (product: ProductCardView, images: CartImageVariants) => void;
-  removeFromCart: (id: number) => void;
+  removeFromCart: (id: string) => void;
   clearCart: () => void;
 };
 
@@ -34,7 +34,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function removeFromCart(id: number) {
+  function removeFromCart(id: string) {
     setItems((prev) => prev.filter((i) => i.id !== id));
   }
 
