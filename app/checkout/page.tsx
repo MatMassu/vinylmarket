@@ -1,7 +1,4 @@
-import Contact from "../../components/Checkout/contact";
-import CartReview from "../../components/Checkout/cart_review";
-import Shipping from "../../components/Checkout/shipping";
-import CheckoutButton from "../../components/Checkout/checkout_button";
+import CheckoutFormClient from "../../components/Checkout/checkout_form_client";
 import Link from "next/link";
 
 export default function Checkout() {
@@ -17,12 +14,7 @@ export default function Checkout() {
           <li className="relative flex-1 text-center text-gray-300">Revisión</li>
         </ol>
       </nav>
-      <article className="grid md:grid-cols-2 gap-6">
-        <Contact />
-        <CartReview />
-        <Shipping />
-      </article>
-      <CheckoutButton />
+      <CheckoutFormClient />
     </main>
   );
 }

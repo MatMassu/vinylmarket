@@ -6,12 +6,18 @@ import { getGuestId } from "../../lib/guest-id";
 
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_CHECKOUT_URL!;
 
-export default function CheckoutButton() {
+type Payer = { email: string; firstName: string; lastName: string };
+
+export default function CheckoutButton({ payer }: { payer: Payer }) {
   const { items } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleCheckout() {
+    if (!payer.email) {
+      setError("Ingresá tu email para continuar.");
+      return;
+    }
     setError(null);
     setLoading(true);
     try {
@@ -24,6 +30,11 @@ export default function CheckoutButton() {
             product_id: item.id,
             quantity: item.quantity,
           })),
+          payer: {
+            email: payer.email,
+            first_name: payer.firstName,
+            last_name: payer.lastName,
+          },
         }),
       });
 
