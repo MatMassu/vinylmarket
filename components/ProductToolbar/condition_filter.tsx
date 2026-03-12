@@ -36,7 +36,7 @@ export default function ConditionFilter() {
       <label className="text-sm font-medium">Estado de portada</label>
 
       <Slider.Root
-        className="relative flex items-center h-6 "
+        className="relative flex items-center h-6 touch-none"
         min={0}
         max={6}
         step={0.01}

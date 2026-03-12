@@ -14,8 +14,9 @@ export default function CheckoutButton({ payer }: { payer: Payer }) {
   const [error, setError] = useState<string | null>(null);
 
   async function handleCheckout() {
-    if (!payer.email) {
-      setError("Ingresá tu email para continuar.");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(payer.email)) {
+      setError("Ingresá un email válido para continuar.");
       return;
     }
     setError(null);

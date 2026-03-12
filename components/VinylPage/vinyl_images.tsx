@@ -24,7 +24,7 @@ export default function VinylImages({ images }: VinylImagesProps) {
   }
 
   return (
-    <div className="relative flex gap-2 items-center justify-center align-middle w-120">
+    <div className="relative flex gap-2 items-center justify-center align-middle w-full max-w-[480px] touch-pan-y">
       {images.length > 1 && (
         <button
           onClick={prevImage}
