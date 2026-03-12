@@ -78,13 +78,15 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
         MAX(CASE WHEN pi.variant = 'grid' THEN pi.url END) AS grid_image,
         MAX(CASE WHEN pi.variant = 'cart' THEN pi.url END) AS cart_image
 
-      FROM products AS p 
-      LEFT JOIN product_images AS pi 
-        ON pi.product_id = p.id 
-       AND pi.type = 'frente' 
+      FROM products AS p
+      LEFT JOIN product_images AS pi
+        ON pi.product_id = p.id
+       AND pi.type = 'frente'
        AND pi.variant IN ('grid', 'cart')
 
-      GROUP BY 
+      WHERE p.stock > p.reserved
+
+      GROUP BY
         p.id,
         p.slug,
         p.title,
