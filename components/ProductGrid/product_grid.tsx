@@ -1,6 +1,6 @@
 import ProductCard from "./product_card";
 import { ProductCardView } from "../../types/types";
-import Pagination from "../pagination";
+import InfiniteScrollTrigger from "../infinite_scroll_trigger";
 
 type SortOption = "price-desc" | "price-asc";
 type ProductGridProps = {
@@ -62,7 +62,7 @@ export default function ProductGrid({
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      {hasMore && <Pagination />}
+      {hasMore && <InfiniteScrollTrigger />}
       {visibleProducts.length == 0 && (
         <div className="flex w-full justify-center">
           {query && `No se encontraron resultados para "${query}"`}
