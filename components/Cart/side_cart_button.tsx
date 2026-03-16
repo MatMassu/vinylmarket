@@ -13,16 +13,19 @@ export default function SideCartButton() {
   return (
     <>
       <button
-        className="absolute right-10 scale-120 md:scale-150 cursor-pointer"
         onClick={() => setOpen(true)}
+        aria-label="Abrir carrito"
+        className={`fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-black text-white cursor-pointer
+          flex items-center justify-center
+          shadow-[0_4px_24px_rgba(0,0,0,0.35)]
+          hover:scale-110 active:scale-95 transition-all duration-300
+          ${totalItems > 0 ? "opacity-100 scale-100" : "opacity-0 scale-75 pointer-events-none"}`}
       >
         <div className="relative">
-          <ShoppingCart className="stroke-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] hover:scale-[1.1] transition-all duration-300" />
-          {totalItems > 0 && (
-            <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
-              {totalItems > 99 ? "99+" : totalItems}
-            </span>
-          )}
+          <ShoppingCart size={22} className="stroke-white" />
+          <span className="absolute -top-2.5 -right-2.5 bg-white text-black text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+            {totalItems > 99 ? "99+" : totalItems}
+          </span>
         </div>
       </button>
       <CartPanel open={open} onClose={() => setOpen(false)} />

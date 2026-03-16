@@ -16,7 +16,7 @@ export default function Contact({ email, firstName, lastName, emailError, onChan
         Contacto
       </h2>
       <input
-        placeholder="Email *"
+        placeholder="Email (*)"
         type="email"
         value={email}
         onChange={(e) => onChange("email", e.target.value)}
@@ -24,20 +24,20 @@ export default function Contact({ email, firstName, lastName, emailError, onChan
       />
       <div className="flex flex-col md:flex-row gap-2">
         <input
-          placeholder="Nombre/s"
+          placeholder="Nombre"
           value={firstName}
           onChange={(e) => onChange("firstName", e.target.value)}
           className="min-w-10 border border-black rounded-md md:flex-1/2 p-2 text-sm"
         />
         <input
-          placeholder="Apellido/s"
+          placeholder="Apellido"
           value={lastName}
           onChange={(e) => onChange("lastName", e.target.value)}
           className="min-w-10 border border-black rounded-md flex-1 md:flex-1/2 p-2 text-sm"
         />
       </div>
       <input
-        placeholder="Numero de contacto"
+        placeholder="Cel."
         className="border border-black rounded-md p-2 text-sm"
       />
     </section>

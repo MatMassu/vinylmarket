@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../../components/header";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
+import SideCartButton from "../../components/Cart/side_cart_button";
 
 export default function StoreLayout({
   children,
@@ -18,6 +19,7 @@ export default function StoreLayout({
       {children}
       {modal}
       <Footer />
+      <SideCartButton />
     </>
   );
 }

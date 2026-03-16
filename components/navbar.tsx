@@ -2,14 +2,14 @@ import Link from "next/link";
 
 const NAV_ITEMS = [
   { label: "Inicio", href: "/" },
-  { label: "Productos", href: "/" },
+  { label: "Ver todo", href: "/" },
   { label: "Información", href: "/" },
   { label: "Contacto", href: "/" },
 ];
 
 export default function Navbar() {
   return (
-    <nav className="bg-black h-10 flex items-center px-6 sm:px-12 md:px-20">
+    <nav className="bg-black h-10 flex items-center px-6 sm:px-12 md:px-50">
       <ul className="flex items-center justify-between w-full">
         {NAV_ITEMS.map(({ label, href }) => (
           <li key={label}>
