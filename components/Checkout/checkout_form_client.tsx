@@ -5,6 +5,7 @@ import Contact from "./contact";
 import CartReview from "./cart_review";
 import Shipping from "./shipping";
 import CheckoutButton from "./checkout_button";
+import MPDeviceFingerprint from "./mp_device_fingerprint";
 
 export default function CheckoutFormClient() {
   const [payer, setPayer] = useState({ email: "", firstName: "", lastName: "" });
@@ -15,6 +16,7 @@ export default function CheckoutFormClient() {
 
   return (
     <>
+      <MPDeviceFingerprint />
       <article className="grid md:grid-cols-2 gap-6">
         <Contact
           email={payer.email}
