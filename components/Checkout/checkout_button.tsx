@@ -8,7 +8,13 @@ const CHECKOUT_URL = process.env.NEXT_PUBLIC_CHECKOUT_URL!;
 
 type Payer = { email: string; firstName: string; lastName: string };
 
-export default function CheckoutButton({ payer }: { payer: Payer }) {
+export default function CheckoutButton({
+  payer,
+  onEmailError,
+}: {
+  payer: Payer;
+  onEmailError: (v: boolean) => void;
+}) {
   const { items } = useCart();
   const [error, setError] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -17,9 +23,11 @@ export default function CheckoutButton({ payer }: { payer: Payer }) {
   function handleContinue() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(payer.email)) {
+      onEmailError(true);
       setError("Ingresá un email válido para continuar.");
       return;
     }
+    onEmailError(false);
     setError(null);
     setShowPopup(true);
   }
@@ -83,7 +91,7 @@ export default function CheckoutButton({ payer }: { payer: Payer }) {
               <button
                 onClick={() => setShowPopup(false)}
                 disabled={loading}
-                className="border border-gray-300 text-sm w-full p-2 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-40"
+                className="cursor-pointer border border-gray-300 text-sm w-full p-2 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-40"
               >
                 Volver
               </button>

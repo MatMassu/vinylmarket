@@ -2,10 +2,11 @@ type ContactProps = {
   email: string;
   firstName: string;
   lastName: string;
+  emailError?: boolean;
   onChange: (field: "email" | "firstName" | "lastName", value: string) => void;
 };
 
-export default function Contact({ email, firstName, lastName, onChange }: ContactProps) {
+export default function Contact({ email, firstName, lastName, emailError, onChange }: ContactProps) {
   return (
     <section
       aria-labelledby="contacto-heading"
@@ -15,11 +16,11 @@ export default function Contact({ email, firstName, lastName, onChange }: Contac
         Contacto
       </h2>
       <input
-        placeholder="Email"
+        placeholder="Email *"
         type="email"
         value={email}
         onChange={(e) => onChange("email", e.target.value)}
-        className="border border-black rounded-md p-2 text-sm"
+        className={`border border-black rounded-md p-2 text-sm ${emailError ? "border-t-2 border-t-red-500" : ""}`}
       />
       <div className="flex flex-col md:flex-row gap-2">
         <input

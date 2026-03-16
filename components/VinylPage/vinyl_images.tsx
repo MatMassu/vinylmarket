@@ -24,28 +24,30 @@ export default function VinylImages({ images }: VinylImagesProps) {
   }
 
   return (
-    <div className="relative flex gap-2 items-center justify-center align-middle w-full max-w-[480px] touch-pan-y">
+    <div className="relative flex gap-3 items-center justify-center w-full max-w-[480px]">
       {images.length > 1 && (
         <button
           onClick={prevImage}
-          className="bg-black opacity-80 text-white rounded-full w-6 h-6 text-center hover:opacity-70 active:scale-96 duration-100 transition-all text-xs"
+          className="cursor-pointer shrink-0 bg-black opacity-80 text-white rounded-full w-8 h-8 flex items-center justify-center hover:opacity-70 active:scale-95 duration-100 transition-all text-sm"
         >
           ←
         </button>
       )}
 
-      <Image
-        src={currentImage}
-        alt={`test`}
-        width={400}
-        height={400}
-        className="aspect-square"
-      />
+      <a href={currentImage} target="_blank" rel="noreferrer" className="cursor-zoom-in">
+        <Image
+          src={currentImage}
+          alt=""
+          width={400}
+          height={400}
+          className="aspect-square touch-pinch-zoom"
+        />
+      </a>
 
       {images.length > 1 && (
         <button
           onClick={nextImage}
-          className="bg-black opacity-80 text-white rounded-full w-6 h-6 text-center hover:opacity-70 active:scale-96 duration-100 transition-all text-xs"
+          className="cursor-pointer shrink-0 bg-black opacity-80 text-white rounded-full w-8 h-8 flex items-center justify-center hover:opacity-70 active:scale-95 duration-100 transition-all text-sm"
         >
           →
         </button>

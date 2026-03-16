@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 export function CloseButton() {
   const router = useRouter();
   return (
-    <button className="relative text-3xl" onClick={() => router.back()}>
+    <button className="relative text-3xl cursor-pointer" onClick={() => router.back()}>
       <X />
     </button>
   );

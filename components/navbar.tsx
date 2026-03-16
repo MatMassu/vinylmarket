@@ -9,13 +9,13 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   return (
-    <nav className="bg-black h-10 flex items-center justify-center px-4">
-      <ul className="flex items-center gap-4 sm:gap-8 md:gap-12">
+    <nav className="bg-black h-10 flex items-center px-6 sm:px-12 md:px-20">
+      <ul className="flex items-center justify-between w-full">
         {NAV_ITEMS.map(({ label, href }) => (
           <li key={label}>
             <Link
               href={href}
-              className="text-white text-xs sm:text-sm font-medium tracking-wide hover:text-gray-300 transition-colors"
+              className="text-white text-xs sm:text-sm md:text-base font-medium tracking-wide hover:text-gray-300 transition-colors"
             >
               {label}
             </Link>

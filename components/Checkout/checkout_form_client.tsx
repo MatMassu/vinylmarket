@@ -9,9 +9,11 @@ import MPDeviceFingerprint from "./mp_device_fingerprint";
 
 export default function CheckoutFormClient() {
   const [payer, setPayer] = useState({ email: "", firstName: "", lastName: "" });
+  const [emailError, setEmailError] = useState(false);
 
   function handleChange(field: "email" | "firstName" | "lastName", value: string) {
     setPayer((prev) => ({ ...prev, [field]: value }));
+    if (field === "email") setEmailError(false);
   }
 
   return (
@@ -22,12 +24,13 @@ export default function CheckoutFormClient() {
           email={payer.email}
           firstName={payer.firstName}
           lastName={payer.lastName}
+          emailError={emailError}
           onChange={handleChange}
         />
         <CartReview />
         <Shipping />
       </article>
-      <CheckoutButton payer={payer} />
+      <CheckoutButton payer={payer} onEmailError={setEmailError} />
     </>
   );
 }

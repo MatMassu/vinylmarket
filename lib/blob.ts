@@ -21,11 +21,22 @@ export async function getFrontImages(productId: string): Promise<ProductImages[]
 export async function getModalImages(productId: string): Promise<ProductImages[]> {
   try {
     const rows = await sql`
-    SELECT *
-    FROM product_images
-    WHERE product_id = ${productId}
-      AND variant = 'modal'
-  `;
+      SELECT *
+      FROM product_images
+      WHERE product_id = ${productId}
+        AND variant = 'modal'
+      ORDER BY CASE type
+        WHEN 'frente'      THEN 1
+        WHEN 'disco'       THEN 2
+        WHEN 'disco1'      THEN 3
+        WHEN 'disco2'      THEN 4
+        WHEN 'disco3'      THEN 5
+        WHEN 'folleto'     THEN 6
+        WHEN 'folleto_rev' THEN 7
+        WHEN 'rev'         THEN 8
+        ELSE 9
+      END
+    `;
 
     return rows as ProductImages[];
   } catch (err) {

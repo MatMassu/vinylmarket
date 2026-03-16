@@ -11,15 +11,6 @@ export default function Checkout() {
         </Link>
         <h1 className="text-2xl">Checkout</h1>
       </div>
-      <nav aria-label="Pasos checkout">
-        <ol className="flex w-full justify-between text-xs select-none">
-          <li className="relative flex-1 text-center cursor-pointer">
-            <Link href="/checkout">Datos</Link>
-          </li>
-          <li className="relative flex-1 text-center text-gray-300">Pago</li>
-          <li className="relative flex-1 text-center text-gray-300">Revisión</li>
-        </ol>
-      </nav>
       <CheckoutFormClient />
     </main>
   );
