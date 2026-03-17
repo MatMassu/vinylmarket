@@ -1,18 +1,20 @@
 import HeroSection from "../../components/Home/hero_section";
-import { getFeaturedProduct, getTopArtists } from "../../lib/queries/home";
+import VinylCarousel from "../../components/Home/vinyl_carousel";
+import { getFeaturedProduct, getTopArtists, getBestConditionVinyls } from "../../lib/queries/home";
 import { getMediaImages } from "../../lib/blob";
 
 export default async function InicioPage() {
   const { hero } = getMediaImages();
-  const [featured, artists] = await Promise.all([
+  const [featured, artists, bestCondition] = await Promise.all([
     getFeaturedProduct(),
     getTopArtists(),
+    getBestConditionVinyls(),
   ]);
 
   return (
     <>
       <HeroSection heroImageUrl={hero} featured={featured} artists={artists} />
-      {/* Carousels: Mejor condición, Más populares, Más raros — próximamente */}
+      <VinylCarousel title="Mejor condición" products={bestCondition} />
     </>
   );
 }

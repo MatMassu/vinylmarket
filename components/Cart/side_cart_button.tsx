@@ -22,8 +22,8 @@ export default function SideCartButton() {
           ${totalItems > 0 ? "opacity-100 scale-100" : "opacity-0 scale-75 pointer-events-none"}`}
       >
         <div className="relative">
-          <ShoppingCart size={30} className="stroke-white" />
-          <span className="absolute -top-2.5 -right-2.5 bg-white text-black text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+          <ShoppingCart size={33} className="stroke-white -translate-x-0.5" />
+          <span className="absolute -translate-y-10 translate-x-4.5 border-black border-1 bg-white text-black text-[12px] rounded-full w-5 h-5 flex items-center justify-center leading-none">
             {totalItems > 99 ? "99+" : totalItems}
           </span>
         </div>

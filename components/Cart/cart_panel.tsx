@@ -73,10 +73,10 @@ export default function CartPanel({ open, onClose }: CartPanelProps) {
             href="/checkout"
             onClick={onClose}
             className={clsx(
-              "block text-center py-2 rounded transition",
+              "block text-center py-2 transition-colors font-medium text-sm",
               items.length === 0
-                ? "bg-gray-300 text-gray-500 pointer-events-none"
-                : "bg-blue-700 text-white hover:opacity-80 active:scale-95"
+                ? "bg-gray-200 text-gray-400 pointer-events-none"
+                : "bg-black text-white hover:bg-gray-800 active:scale-95"
             )}
           >
             Ir a pagar

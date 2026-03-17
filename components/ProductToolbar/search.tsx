@@ -20,7 +20,7 @@ export default function SearchBar() {
   }, 300);
 
   return (
-    <form role="search" className="flex h-10 w-full bg-white">
+    <form role="search" className="flex items-center h-10 w-full bg-white rounded-lg shadow-sm px-3 gap-2">
       <label htmlFor="search" className="sr-only">
         Buscar vinilos (nombre o artista)
       </label>
@@ -29,12 +29,13 @@ export default function SearchBar() {
         type="search"
         name="query"
         placeholder="Buscar..."
-        className="p-4 text-center w-full md:text-left focus:outline-none rounded-lg shadow-sm focus:ring-2 focus:ring-neutral-300/30 transition-all"
+        className="flex-1 text-sm text-left focus:outline-none bg-transparent"
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
         defaultValue={searchParams.get("query")?.toString()}
       />
+      <span className="text-gray-400 text-lg leading-none select-none">→</span>
     </form>
   );
 }

@@ -11,8 +11,9 @@ export default function Header() {
       <Link href="/">
         <h1
           className="text-4xl xl:text-5xl text-white font-serif hover:scale-[1.05]
-            drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]
-            duration-300 transform translate-all tracking-wider select-none cursor-pointer"
+            duration-300 transform translate-all tracking-wider select-none cursor-pointer
+            px-8 py-2 bg-transparent backdrop-blur-sm
+            [mask-image:radial-gradient(ellipse_75%_95%_at_center,black_55%,transparent_100%)]"
         >
           Vinilo Market
         </h1>

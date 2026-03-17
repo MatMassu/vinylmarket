@@ -11,31 +11,31 @@ type Props = {
 
 export default function HeroSection({ heroImageUrl, featured, artists }: Props) {
   return (
-    <section className="bg-black text-white flex flex-col min-h-[55vh]">
+    <section className="bg-black text-white flex flex-col pb-10">
 
-      {/* Search bar */}
-      <div className="px-6 sm:px-12 md:px-20 pt-7 pb-5">
-        <form action="/store" method="get" className="flex items-center gap-3 border-b border-white/20 pb-3 max-w-lg">
+      {/* Search bar — matches navbar horizontal padding */}
+      <div className="px-6 sm:px-12 md:px-50 pt-6 pb-5">
+        <form action="/store" method="get" className="flex items-center gap-2 bg-white rounded-lg shadow-sm px-4 h-10 max-w-lg">
           <input
             name="query"
             placeholder="Encontrá tu próximo vinilo..."
-            className="flex-1 bg-transparent text-white placeholder:text-white/40 text-sm outline-none"
+            className="flex-1 text-gray-700 placeholder:text-gray-400 text-sm outline-none bg-transparent"
             autoComplete="off"
           />
           <button
             type="submit"
-            className="cursor-pointer text-white/60 hover:text-white transition-colors text-lg leading-none"
+            className="cursor-pointer text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none"
           >
             →
           </button>
         </form>
       </div>
 
-      {/* Main content */}
-      <div className="flex flex-col md:flex-row flex-1">
+      {/* Main content — CSS grid so border-l spans from search bar level */}
+      <div className="flex flex-col mx-50 md:grid md:grid-cols-[3fr_2fr] md:h-[38vh]">
 
         {/* Left: hero photo with statement overlay */}
-        <div className="relative flex-[3] min-h-[260px] overflow-hidden">
+        <div className="relative min-h-[200px] md:min-h-0 overflow-hidden">
           <Image
             src={heroImageUrl}
             alt=""
@@ -43,30 +43,14 @@ export default function HeroSection({ heroImageUrl, featured, artists }: Props) 
             className="object-cover"
             priority
           />
-          {/* Dark overlay for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-          {/* Statement, artist tags and CTA — bottom-left */}
-          <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-10 flex flex-col gap-4 max-w-lg">
-            <p className="text-white/90 text-base sm:text-lg font-light leading-relaxed">
-              Más de 800 vinilos seleccionados. Cuidadosamente clasificados y embalados.
-              Desde Buenos Aires a todo el país.
-            </p>
-
-            {artists.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {artists.map((artist) => (
-                  <Link
-                    key={artist}
-                    href={`/store?query=${encodeURIComponent(artist)}`}
-                    className="text-xs text-white/70 bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors"
-                  >
-                    {artist}
-                  </Link>
-                ))}
-              </div>
-            )}
-
+          {/* Statement and CTA — bottom-left, aligned with navbar */}
+          <div className="absolute bottom-0 pl-5 pb-6 pr-6 flex flex-col gap-3 max-w-2xl">
+            <div className="text-white/90 text-sm sm:text-base font-light leading-relaxed">
+              <p>Más de 800 vinilos cuidadosamente seleccionados, clasificados y embalados.</p>
+              <p>Desde Buenos Aires a todo el país.</p>
+            </div>
             <Link
               href="/store"
               className="self-start text-sm font-medium text-black bg-white px-5 py-2 hover:bg-gray-200 transition-colors"
@@ -76,11 +60,32 @@ export default function HeroSection({ heroImageUrl, featured, artists }: Props) 
           </div>
         </div>
 
-        {/* Right: featured vinyl */}
+        {/* Right: featured vinyl + artist marquee */}
         {featured && (
-          <div className="flex-[2] border-t md:border-t-0 md:border-l border-white/10 px-6 sm:px-8 md:px-10 py-6 md:py-8 flex flex-col gap-3">
-            <p className="text-[11px] uppercase tracking-widest text-white/40">Destacado</p>
-            <FeaturedVinylCard product={featured} />
+          <div className="border-t md:border-t-0 md:border-l border-white/10 px-6 sm:px-8 md:pl-8 md:pr-50 py-5 md:py-6 flex flex-col gap-4 overflow-hidden">
+            <div className="flex flex-col gap-2">
+              <p className="text-[11px] uppercase tracking-widest text-white/50">Destacado</p>
+              <FeaturedVinylCard product={featured} />
+            </div>
+
+            {artists.length > 0 && (
+              <div className="flex flex-col gap-1 mt-auto overflow-hidden">
+                <p className="text-[10px] uppercase tracking-widest text-white/50">Más artistas en el catálogo</p>
+                <div className="overflow-hidden">
+                  <div className="flex gap-3 animate-[marquee_30s_linear_infinite] w-max">
+                    {[...artists, ...artists].map((artist, i) => (
+                      <Link
+                        key={i}
+                        href={`/store?query=${encodeURIComponent(artist)}`}
+                        className="shrink-0 text-xs text-white/60 hover:text-white/90 transition-colors whitespace-nowrap"
+                      >
+                        {artist}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

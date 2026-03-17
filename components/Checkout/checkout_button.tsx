@@ -84,14 +84,14 @@ export default function CheckoutButton({
               <button
                 onClick={handleConfirm}
                 disabled={loading}
-                className="bg-blue-900 font-semibold text-sm w-full p-2 text-white rounded-lg hover:opacity-70 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+                className="bg-black font-semibold text-sm w-full p-2 text-white hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {loading ? "Procesando..." : "Ir a pagar"}
               </button>
               <button
                 onClick={() => setShowPopup(false)}
                 disabled={loading}
-                className="cursor-pointer border border-gray-300 text-sm w-full p-2 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-40"
+                className="cursor-pointer border border-gray-300 text-sm w-full p-2 hover:bg-gray-100 transition-colors disabled:opacity-40"
               >
                 Volver
               </button>
@@ -105,7 +105,7 @@ export default function CheckoutButton({
         <button
           onClick={handleContinue}
           disabled={items.length === 0}
-          className="bg-blue-900 font-semibold text-md w-full p-2 text-white rounded-lg cursor-pointer hover:opacity-70 active:scale-y-95 transform transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+          className="bg-black font-semibold text-md w-full p-2 text-white cursor-pointer hover:bg-gray-800 active:scale-y-95 transform transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Continuar
         </button>

@@ -19,7 +19,7 @@ export default function SuccessContent() {
       </p>
       <Link
         href="/"
-        className="bg-blue-900 font-semibold text-sm px-6 py-2 text-white rounded-lg hover:opacity-70 transition-opacity mt-2"
+        className="bg-black font-semibold text-sm px-6 py-2 text-white hover:bg-gray-800 transition-colors mt-2"
       >
         Volver a la tienda
       </Link>

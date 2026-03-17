@@ -15,37 +15,37 @@ const GRADING_COLOR: Record<Grading, string> = {
   P:     "text-red-500",
 };
 
-export default function ProductCard({ product }: { product: ProductCardView }) {
+export default function VinylCarouselCard({ product }: { product: ProductCardView }) {
   const { items, addToCart, removeFromCart } = useCart();
   const inCart = items.find((i) => i.id === product.id);
 
   return (
-    <div className="flex flex-col bg-white shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200">
-      <Link href={`/vinyl/${product.id}`} scroll={false} className="block">
+    <div className="flex flex-col w-60 shrink-0 bg-white shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 select-none">
+      <Link href={`/vinyl/${product.id}`} scroll={false} className="block" draggable={false}>
         <Image
           src={product.images.grid}
           alt={`Portada de ${product.title} — ${product.artist}`}
-          width={400}
-          height={400}
+          width={288}
+          height={288}
           className="w-full aspect-square object-cover"
+          draggable={false}
         />
       </Link>
 
       <div className="flex flex-col p-4 flex-1 gap-3">
-        {/* Top: title + artist — expands to fill space */}
+        {/* Top: title / artist — expands to fill available space */}
         <div className="flex flex-col gap-0.5 flex-1">
-          <Link href={`/vinyl/${product.id}`} scroll={false}>
-            <h2 className="font-bold text-sm leading-snug line-clamp-2 text-neutral-800 hover:text-neutral-500 transition-colors cursor-pointer">
+          <Link href={`/vinyl/${product.id}`} scroll={false} draggable={false}>
+            <h3 className="font-bold text-sm leading-snug line-clamp-2 text-neutral-800 hover:text-neutral-500 transition-colors cursor-pointer">
               {product.title}
-            </h2>
+            </h3>
           </Link>
           <p className="text-xs text-neutral-500 line-clamp-1">{product.artist}</p>
         </div>
 
-        {/* Bottom: price + condition + button */}
+        {/* Bottom: price / condition / button — always flush to the card bottom */}
         <div className="flex flex-col gap-2">
           <p className="text-sm font-semibold text-neutral-700">{product.formattedPrice}</p>
-
           <div className="flex gap-3 text-[11px] font-medium text-neutral-600">
             <span>
               Tapa:{" "}

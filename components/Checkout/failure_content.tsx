@@ -43,14 +43,14 @@ export default function FailureContent() {
         <button
           onClick={handleRetry}
           disabled={loading}
-          className="bg-blue-900 font-semibold text-sm px-6 py-2 text-white rounded-lg hover:opacity-70 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+          className="bg-black font-semibold text-sm px-6 py-2 text-white hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Reintentar pago
         </button>
         <button
           onClick={handleLeave}
           disabled={loading}
-          className="border border-gray-400 text-sm px-6 py-2 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="border border-gray-400 text-sm px-6 py-2 hover:bg-gray-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Cancelar pedido
         </button>
