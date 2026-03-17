@@ -58,5 +58,6 @@ export async function getModalImagesView(productId: string): Promise<ModalImages
 export function getMediaImages() {
   return {
     header: `https://kccbcw6rqngvsspk.public.blob.vercel-storage.com/media/header.jpg`,
+    hero: `https://kccbcw6rqngvsspk.public.blob.vercel-storage.com/media/hero.jpg`,
   };
 }

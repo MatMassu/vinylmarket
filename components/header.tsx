@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header
       className="flex relative h-30 items-center justify-center shadow-md bg-black border-b-white/60 border"
-      //style={{ backgroundImage: `url(${images.header})` }}
+      style={{ backgroundImage: `url(${images.header})` }}
     >
       <Link href="/">
         <h1
