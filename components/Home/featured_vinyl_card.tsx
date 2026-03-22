@@ -32,20 +32,20 @@ export default function FeaturedVinylCard({ product }: { product: ProductCardVie
           inCart ? (
             <button
               onClick={() => removeFromCart(product.id)}
-              className="cursor-pointer border border-white text-white text-xs px-3 py-1.5 hover:bg-white hover:text-black transition-colors self-start"
+              className="cursor-pointer border border-white text-white text-xs px-3 h-8 flex items-center justify-center whitespace-nowrap hover:bg-white hover:text-black transition-colors self-start"
             >
-              En el carrito ({inCart.quantity}) · Quitar
+              Sacar del carrito
             </button>
           ) : (
             <button
               onClick={() => addToCart(product, product.images)}
-              className="cursor-pointer bg-white text-black text-xs px-3 py-1.5 font-medium hover:bg-gray-200 transition-colors self-start"
+              className="cursor-pointer bg-white text-black text-xs px-3 h-8 flex items-center justify-center whitespace-nowrap font-medium hover:bg-gray-200 transition-colors self-start"
             >
               Agregar al carrito
             </button>
           )
         ) : (
-          <button disabled className="border border-gray-600 text-gray-600 text-xs px-3 py-1.5 cursor-not-allowed self-start">
+          <button disabled className="border border-gray-600 text-gray-600 text-xs px-3 h-8 flex items-center justify-center whitespace-nowrap cursor-not-allowed self-start">
             Sin stock
           </button>
         )}

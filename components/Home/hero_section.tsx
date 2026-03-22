@@ -43,12 +43,13 @@ export default function HeroSection({ heroImageUrl, featured, artists }: Props) 
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
           {/* Statement and CTA — bottom-left, aligned with navbar */}
           <div className="absolute bottom-0 pl-5 pb-6 pr-6 flex flex-col gap-3 max-w-2xl">
-            <div className="text-white/90 text-sm sm:text-base font-light leading-relaxed">
-              <p>Más de 800 vinilos cuidadosamente seleccionados, clasificados y embalados.</p>
+            <div className="text-white/90 text-sm sm:text-base leading-relaxed">
+              <p>Más de 800 vinilos cuidadosamente seleccionados.</p>
+              <p>Clasificados y embalados con criterio.</p>
               <p>Desde Buenos Aires a todo el país.</p>
             </div>
             <Link

@@ -14,7 +14,7 @@ export default async function InicioPage() {
   return (
     <>
       <HeroSection heroImageUrl={hero} featured={featured} artists={artists} />
-      <VinylCarousel title="Mejor condición" products={bestCondition} />
+      <VinylCarousel title="Vinilos en mejor condición" products={bestCondition} />
     </>
   );
 }

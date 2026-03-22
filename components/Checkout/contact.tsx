@@ -1,45 +1,67 @@
-type ContactProps = {
-  email: string;
-  firstName: string;
-  lastName: string;
+import type { ContactData } from "./checkout_form_client";
+
+type Props = {
+  data: ContactData;
   emailError?: boolean;
-  onChange: (field: "email" | "firstName" | "lastName", value: string) => void;
+  phoneError?: boolean;
+  onChange: (field: keyof ContactData, value: string) => void;
+  onContinue: () => void;
 };
 
-export default function Contact({ email, firstName, lastName, emailError, onChange }: ContactProps) {
+const inputClass = "border border-gray-300 p-2.5 text-sm w-full outline-none focus:border-black transition-colors";
+const errorClass = "border-red-400 focus:border-red-400";
+
+export default function Contact({ data, emailError, phoneError, onChange, onContinue }: Props) {
   return (
-    <section
-      aria-labelledby="contacto-heading"
-      className="flex flex-col gap-3 rounded-md border-gray-300 bg-white border p-6"
+    <form
+      className="flex flex-col gap-6 max-w-md"
+      onSubmit={(e) => { e.preventDefault(); onContinue(); }}
     >
-      <h2 id="contacto-heading" className="font-bold select-none">
-        Contacto
-      </h2>
-      <input
-        placeholder="Email (*)"
-        type="email"
-        value={email}
-        onChange={(e) => onChange("email", e.target.value)}
-        className={`border border-black rounded-md p-2 text-sm ${emailError ? "border-t-2 border-t-red-500" : ""}`}
-      />
-      <div className="flex flex-col md:flex-row gap-2">
-        <input
-          placeholder="Nombre"
-          value={firstName}
-          onChange={(e) => onChange("firstName", e.target.value)}
-          className="min-w-10 border border-black rounded-md md:flex-1/2 p-2 text-sm"
-        />
-        <input
-          placeholder="Apellido"
-          value={lastName}
-          onChange={(e) => onChange("lastName", e.target.value)}
-          className="min-w-10 border border-black rounded-md flex-1 md:flex-1/2 p-2 text-sm"
-        />
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
+          <input
+            placeholder="Email (*)"
+            type="email"
+            value={data.email}
+            onChange={(e) => onChange("email", e.target.value)}
+            className={`${inputClass} ${emailError ? errorClass : ""}`}
+          />
+          {emailError && <p className="text-red-500 text-xs">Ingresá un email válido.</p>}
+        </div>
+
+        <div className="flex gap-2">
+          <input
+            placeholder="Nombre"
+            value={data.firstName}
+            onChange={(e) => onChange("firstName", e.target.value)}
+            className={`${inputClass} flex-1`}
+          />
+          <input
+            placeholder="Apellido"
+            value={data.lastName}
+            onChange={(e) => onChange("lastName", e.target.value)}
+            className={`${inputClass} flex-1`}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <input
+            placeholder="Teléfono / WhatsApp (*)"
+            type="tel"
+            value={data.phone}
+            onChange={(e) => onChange("phone", e.target.value)}
+            className={`${inputClass} ${phoneError ? errorClass : ""}`}
+          />
+          {phoneError && <p className="text-red-500 text-xs">Ingresá un número de teléfono.</p>}
+        </div>
       </div>
-      <input
-        placeholder="Cel."
-        className="border border-black rounded-md p-2 text-sm"
-      />
-    </section>
+
+      <button
+        type="submit"
+        className="cursor-pointer bg-black text-white text-sm font-medium p-2.5 hover:bg-gray-800 transition-colors"
+      >
+        Continuar →
+      </button>
+    </form>
   );
 }

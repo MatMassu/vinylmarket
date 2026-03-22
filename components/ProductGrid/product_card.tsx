@@ -63,20 +63,20 @@ export default function ProductCard({ product }: { product: ProductCardView }) {
             inCart ? (
               <button
                 onClick={() => removeFromCart(product.id)}
-                className="cursor-pointer border border-gray-300 text-xs w-full py-1.5 hover:bg-gray-100 transition-colors"
+                className="cursor-pointer border border-gray-300 text-xs w-full h-8 flex items-center justify-center whitespace-nowrap hover:bg-gray-100 transition-colors"
               >
                 Sacar del carrito
               </button>
             ) : (
               <button
                 onClick={() => addToCart(product, product.images)}
-                className="cursor-pointer bg-black text-white text-xs w-full py-1.5 hover:bg-gray-800 transition-colors font-medium"
+                className="cursor-pointer bg-black text-white text-xs w-full h-8 flex items-center justify-center whitespace-nowrap hover:bg-gray-800 transition-colors font-medium"
               >
                 Agregar al carrito
               </button>
             )
           ) : (
-            <button disabled className="border border-gray-200 text-gray-400 text-xs w-full py-1.5 cursor-not-allowed">
+            <button disabled className="border border-gray-200 text-gray-400 text-xs w-full h-8 flex items-center justify-center whitespace-nowrap cursor-not-allowed">
               Sin stock
             </button>
           )}
