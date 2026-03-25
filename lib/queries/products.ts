@@ -12,13 +12,11 @@ export async function getProducts(): Promise<Product[]> {
   }
 }
 
-export async function getProductById(id: string): Promise<Product> {
+export async function getProductBySlug(slug: string): Promise<Product> {
   try {
-    const rows = await sql`SELECT * FROM products WHERE id = ${id}`;
+    const rows = await sql`SELECT * FROM products WHERE slug = ${slug}`;
     const product = (rows as Product[])[0];
-    if (!product) {
-      notFound();
-    }
+    if (!product) notFound();
     return product;
   } catch (err) {
     console.error("DB ERROR:", err);
@@ -26,7 +24,7 @@ export async function getProductById(id: string): Promise<Product> {
   }
 }
 
-export async function getProductCardViewById(id: string): Promise<ProductCardView | null> {
+export async function getProductCardViewBySlug(slug: string): Promise<ProductCardView | null> {
   try {
     const rows = await sql`
       SELECT
@@ -39,7 +37,7 @@ export async function getProductCardViewById(id: string): Promise<ProductCardVie
         ON pi.product_id = p.id
        AND pi.type = 'frente'
        AND pi.variant IN ('grid', 'cart')
-      WHERE p.id = ${id}
+      WHERE p.slug = ${slug}
       GROUP BY p.id, p.slug, p.title, p.artist, p.price, p.stock, p.cover_condition, p.disc_condition, p.created_at
     `;
     const row = (rows as any[])[0];

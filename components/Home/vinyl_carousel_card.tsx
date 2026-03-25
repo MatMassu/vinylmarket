@@ -21,7 +21,7 @@ export default function VinylCarouselCard({ product }: { product: ProductCardVie
 
   return (
     <div className="flex flex-col w-60 shrink-0 bg-white shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 select-none">
-      <Link href={`/vinyl/${product.id}`} scroll={false} className="block" draggable={false}>
+      <Link href={`/vinyl/${product.slug}`} scroll={false} className="block" draggable={false}>
         <Image
           src={product.images.grid}
           alt={`Portada de ${product.title} — ${product.artist}`}
@@ -35,7 +35,7 @@ export default function VinylCarouselCard({ product }: { product: ProductCardVie
       <div className="flex flex-col p-4 flex-1 gap-3">
         {/* Top: title / artist — expands to fill available space */}
         <div className="flex flex-col gap-0.5 flex-1">
-          <Link href={`/vinyl/${product.id}`} scroll={false} draggable={false}>
+          <Link href={`/vinyl/${product.slug}`} scroll={false} draggable={false}>
             <h3 className="font-bold text-sm leading-snug line-clamp-2 text-neutral-800 hover:text-neutral-500 transition-colors cursor-pointer">
               {product.title}
             </h3>

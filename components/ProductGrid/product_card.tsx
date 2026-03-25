@@ -21,7 +21,7 @@ export default function ProductCard({ product }: { product: ProductCardView }) {
 
   return (
     <div className="flex flex-col bg-white shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200">
-      <Link href={`/vinyl/${product.id}`} scroll={false} className="block">
+      <Link href={`/vinyl/${product.slug}`} scroll={false} className="block">
         <Image
           src={product.images.grid}
           alt={`Portada de ${product.title} — ${product.artist}`}
@@ -34,7 +34,7 @@ export default function ProductCard({ product }: { product: ProductCardView }) {
       <div className="flex flex-col p-4 flex-1 gap-3">
         {/* Top: title + artist — expands to fill space */}
         <div className="flex flex-col gap-0.5 flex-1">
-          <Link href={`/vinyl/${product.id}`} scroll={false}>
+          <Link href={`/vinyl/${product.slug}`} scroll={false}>
             <h2 className="font-bold text-sm leading-snug line-clamp-2 text-neutral-800 hover:text-neutral-500 transition-colors cursor-pointer">
               {product.title}
             </h2>

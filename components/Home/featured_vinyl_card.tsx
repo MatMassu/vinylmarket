@@ -11,7 +11,7 @@ export default function FeaturedVinylCard({ product }: { product: ProductCardVie
 
   return (
     <div className="flex flex-col gap-3 2xl:flex-row 2xl:items-start">
-      <Link href={`/vinyl/${product.id}`} scroll={false} className="shrink-0 block overflow-hidden">
+      <Link href={`/vinyl/${product.slug}`} scroll={false} className="shrink-0 block overflow-hidden">
         <Image
           src={product.images.grid}
           alt={`${product.title} — ${product.artist}`}
