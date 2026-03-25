@@ -13,57 +13,59 @@ export default function HeroSection({ heroImageUrl, featured, artists }: Props) 
   return (
     <section className="bg-black text-white flex flex-col pb-10">
 
-      {/* Search bar — matches navbar horizontal padding */}
-      <div className="px-6 sm:px-12 md:px-50 pt-6 pb-5">
-        <form action="/store" method="get" className="flex items-center gap-2 bg-white rounded-lg shadow-sm px-4 h-10 max-w-lg">
-          <input
-            name="query"
-            placeholder="Encontrá tu próximo vinilo..."
-            className="flex-1 text-gray-700 placeholder:text-gray-400 text-sm outline-none bg-transparent"
-            autoComplete="off"
-          />
-          <button
-            type="submit"
-            className="cursor-pointer text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none"
-          >
-            →
-          </button>
-        </form>
-      </div>
+      {/* Outer grid — search bar lives in the 3fr column so it matches the hero image width */}
+      <div className="flex flex-col mx-6 sm:mx-12 md:mx-50 md:grid md:grid-cols-[3fr_2fr] md:items-end">
 
-      {/* Main content — CSS grid so border-l spans from search bar level */}
-      <div className="flex flex-col mx-50 md:grid md:grid-cols-[3fr_2fr] md:h-[38vh]">
+        {/* Left: search bar + hero photo stacked */}
+        <div className="flex flex-col">
+          <div className="pt-6 pb-5">
+            <form action="/store" method="get" className="flex items-center gap-2 bg-white rounded-lg shadow-sm px-4 h-10">
+              <input
+                name="query"
+                placeholder="Encontrá tu próximo vinilo..."
+                className="flex-1 text-gray-700 placeholder:text-gray-400 text-sm outline-none bg-transparent"
+                autoComplete="off"
+              />
+              <button
+                type="submit"
+                className="cursor-pointer text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none"
+              >
+                →
+              </button>
+            </form>
+          </div>
 
-        {/* Left: hero photo with statement overlay */}
-        <div className="relative min-h-[200px] md:min-h-0 overflow-hidden">
-          <Image
-            src={heroImageUrl}
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          {/* Hero photo */}
+          <div className="relative min-h-[200px] md:min-h-[38vh] overflow-hidden">
+            <Image
+              src={heroImageUrl}
+              alt=""
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-          {/* Statement and CTA — bottom-left, aligned with navbar */}
-          <div className="absolute bottom-0 pl-5 pb-6 pr-6 flex flex-col gap-3 max-w-2xl">
-            <div className="text-white/90 text-sm sm:text-base leading-relaxed">
-              <p>Más de 800 vinilos cuidadosamente seleccionados.</p>
-              <p>Clasificados y embalados con criterio.</p>
-              <p>Desde Buenos Aires a todo el país.</p>
+            {/* Statement and CTA */}
+            <div className="absolute bottom-0 pl-5 pb-6 pr-6 flex flex-col gap-3 max-w-2xl">
+              <div className="text-white/90 text-sm sm:text-base leading-relaxed">
+                <p>Más de 800 vinilos cuidadosamente seleccionados.</p>
+                <p>Clasificados y embalados con criterio.</p>
+                <p>Desde Buenos Aires a todo el país.</p>
+              </div>
+              <Link
+                href="/store"
+                className="self-start text-sm font-medium text-black bg-white px-5 py-2 hover:bg-gray-200 transition-colors"
+              >
+                Ver catálogo →
+              </Link>
             </div>
-            <Link
-              href="/store"
-              className="self-start text-sm font-medium text-black bg-white px-5 py-2 hover:bg-gray-200 transition-colors"
-            >
-              Ver catálogo →
-            </Link>
           </div>
         </div>
 
         {/* Right: featured vinyl + artist marquee */}
         {featured && (
-          <div className="border-t md:border-t-0 md:border-l border-white/10 px-6 sm:px-8 md:pl-8 md:pr-50 py-5 md:py-6 flex flex-col gap-4 overflow-hidden">
+          <div className="border-t md:border-t-0 md:border-l border-white/10 px-6 sm:px-8 md:pl-8 md:pr-8 py-5 md:py-6 flex flex-col gap-4 overflow-hidden">
             <div className="flex flex-col gap-2">
               <p className="text-[11px] uppercase tracking-widest text-white/50">Destacado</p>
               <FeaturedVinylCard product={featured} />

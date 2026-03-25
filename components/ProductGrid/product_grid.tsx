@@ -2,7 +2,7 @@ import ProductCard from "./product_card";
 import { ProductCardView } from "../../types/types";
 import InfiniteScrollTrigger from "../infinite_scroll_trigger";
 
-type SortOption = "price-desc" | "price-asc";
+type SortOption = "price-desc" | "price-asc" | "date-desc";
 type ProductGridProps = {
   products: ProductCardView[];
   page?: number;
@@ -10,6 +10,8 @@ type ProductGridProps = {
   sort?: SortOption;
   minCondition?: number;
   maxCondition?: number;
+  minDiscCondition?: number;
+  maxDiscCondition?: number;
 };
 
 const PAGE_SIZE = 12;
@@ -22,6 +24,8 @@ export default function ProductGrid({
   sort,
   minCondition = 0,
   maxCondition = 6,
+  minDiscCondition = 0,
+  maxDiscCondition = 6,
 }: ProductGridProps) {
   let result = [...products];
 
@@ -32,21 +36,21 @@ export default function ProductGrid({
   }
 
   result = result.filter((product) => {
-    const value = CONDITION_SCALE.indexOf(product.cover_condition);
-    return value >= minCondition && value <= maxCondition;
+    const cover = CONDITION_SCALE.indexOf(product.cover_condition);
+    const disc = CONDITION_SCALE.indexOf(product.disc_condition);
+    return (
+      cover >= minCondition && cover <= maxCondition &&
+      disc >= minDiscCondition && disc <= maxDiscCondition
+    );
   });
 
   if (sort) {
     result = [...result].sort((a, b) => {
       switch (sort) {
-        case "price-desc":
-          return b.price - a.price;
-          break;
-        case "price-asc":
-          return a.price - b.price;
-          break;
-        default:
-          return 0;
+        case "price-desc": return b.price - a.price;
+        case "price-asc":  return a.price - b.price;
+        case "date-desc":  return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        default:           return 0;
       }
     });
   }

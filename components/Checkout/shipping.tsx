@@ -14,20 +14,20 @@ const METHODS: { id: ShippingMethod; label: string; description: string; price: 
   {
     id: "local",
     label: "Envío local gratuito",
-    description: "Martes y viernes en el área de entrega. Coordinamos por WhatsApp.",
+    description: "Martes y viernes en el área de entrega.",
     price: "Sin cargo",
   },
   {
     id: "branch",
     label: "Retiro en sucursal",
-    description: "Retirá en una sucursal de EnvioPack cerca de vos.",
-    price: "A calcular",
+    description: "Retirá en una sucursal cercana.",
+    price: "",
   },
   {
     id: "door",
     label: "Envío a domicilio",
-    description: "Entrega puerta a puerta a través de EnvioPack.",
-    price: "A calcular",
+    description: "Entrega puerta a puerta a través de PAQ.AR.",
+    price: "",
   },
 ];
 
@@ -104,9 +104,8 @@ export default function StepShipping({ data, errors, onChange, onContinue, onBac
       {data.method === "local" && (
         <div className="flex flex-col gap-3">
           <p className="text-xs text-gray-500 border border-gray-200 p-3">
-            Zona de entrega: CABA y alrededores (hasta ~5km del centro).
             Verificá que tu barrio esté incluido antes de continuar.
-            Te contactamos por WhatsApp para coordinar el día y horario.
+            Te contactaremos por WhatsApp para coordinar el día y horario.
           </p>
           <div className="flex gap-2">
             <Field
@@ -142,7 +141,6 @@ export default function StepShipping({ data, errors, onChange, onContinue, onBac
         <div className="flex flex-col gap-3">
           <p className="text-xs text-gray-500 border border-gray-200 p-3">
             Ingresá tu provincia y localidad para ver las sucursales disponibles.
-            El costo de envío se calculará en el resumen.
           </p>
           <Field
             placeholder="Provincia (*)"
@@ -194,12 +192,25 @@ export default function StepShipping({ data, errors, onChange, onContinue, onBac
             <input placeholder="Piso"  value={data.floor} onChange={(e) => onChange({ floor: e.target.value })} className={`${base} flex-1`} />
             <input placeholder="Depto" value={data.apt}   onChange={(e) => onChange({ apt:   e.target.value })} className={`${base} flex-1`} />
           </div>
-          <Field
-            placeholder="Código Postal (*)"
-            value={data.zip}
-            onChange={(v) => onChange({ zip: v })}
-            error={errors.zip}
-          />
+          <div className="flex flex-col gap-1">
+            <Field
+              placeholder="Código Postal (*)"
+              value={data.zip}
+              onChange={(v) => onChange({ zip: v })}
+              error={errors.zip}
+            />
+            <p className="text-xs text-gray-400">
+              ¿No sabés tu código postal?{" "}
+              <a
+                href="https://www.correoargentino.com.ar/formularios/cpa"
+                target="_blank"
+                rel="noreferrer"
+                className="underline hover:text-gray-600 transition-colors"
+              >
+                Consultalo aquí
+              </a>
+            </p>
+          </div>
         </div>
       )}
 

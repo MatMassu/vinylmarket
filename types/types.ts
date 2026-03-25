@@ -50,6 +50,7 @@ export type ProductCardView = {
   inStock: boolean;
   cover_condition: Grading;
   disc_condition: Grading;
+  created_at: string;
   images: {
     grid: string;
     cart: string;

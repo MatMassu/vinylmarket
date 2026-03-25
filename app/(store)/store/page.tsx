@@ -4,7 +4,7 @@ import Toolbar from "../../../components/ProductToolbar/toolbar";
 import Filter from "../../../components/ProductToolbar/filter";
 import { getProductCardViews } from "../../../lib/queries/products";
 
-type SortOption = "price-desc" | "price-asc";
+type SortOption = "price-desc" | "price-asc" | "date-desc";
 
 export default async function StorePage({
   searchParams,
@@ -15,6 +15,8 @@ export default async function StorePage({
     sort?: SortOption;
     minCondition?: number;
     maxCondition?: number;
+    minDiscCondition?: number;
+    maxDiscCondition?: number;
   }>;
 }) {
   const params = await searchParams;
@@ -32,6 +34,8 @@ export default async function StorePage({
           sort={params.sort}
           minCondition={Number(params.minCondition ?? 0)}
           maxCondition={Number(params.maxCondition ?? 6)}
+          minDiscCondition={Number(params.minDiscCondition ?? 0)}
+          maxDiscCondition={Number(params.maxDiscCondition ?? 6)}
         />
       </div>
     </main>

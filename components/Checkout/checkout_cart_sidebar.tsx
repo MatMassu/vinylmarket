@@ -18,9 +18,9 @@ export default function CheckoutCartSidebar() {
             <Image
               src={item.images.cart}
               alt={item.title}
-              width={52}
-              height={52}
-              className="w-13 h-13 object-cover shrink-0"
+              width={96}
+              height={96}
+              className="w-23 h-23 object-cover shrink-0"
             />
             <div className="flex flex-col flex-1 min-w-0 text-sm">
               <p className="font-medium line-clamp-1">{item.title}</p>

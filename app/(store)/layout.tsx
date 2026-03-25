@@ -19,7 +19,10 @@ export default function StoreLayout({
       {children}
       {modal}
       <Footer />
-      <SideCartButton />
+      {/* Fixed at the top-right, overlays header position on scroll */}
+      <div className="fixed top-[2.125rem] right-10 z-40">
+        <SideCartButton />
+      </div>
     </>
   );
 }

@@ -6,13 +6,23 @@ import { useEffect, useState } from "react";
 
 const CONDITIONS = ["P", "F", "G", "G+", "VG", "VG+", "NM"];
 
-export default function ConditionFilter() {
+type Props = {
+  label?: string;
+  minParam?: string;
+  maxParam?: string;
+};
+
+export default function ConditionFilter({
+  label = "Estado de portada",
+  minParam = "minCondition",
+  maxParam = "maxCondition",
+}: Props) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
 
-  const urlMin = Number(searchParams.get("minCondition") ?? 0);
-  const urlMax = Number(searchParams.get("maxCondition") ?? 6);
+  const urlMin = Number(searchParams.get(minParam) ?? 0);
+  const urlMax = Number(searchParams.get(maxParam) ?? 6);
 
   const [value, setValue] = useState([urlMin, urlMax]);
   const [dragging, setDragging] = useState(false);
@@ -34,14 +44,14 @@ export default function ConditionFilter() {
   function handleValueCommit(values: number[]) {
     setDragging(false);
     const params = new URLSearchParams(searchParams);
-    params.set("minCondition", String(values[0]));
-    params.set("maxCondition", String(values[1]));
+    params.set(minParam, String(values[0]));
+    params.set(maxParam, String(values[1]));
     replace(`${pathname}?${params.toString()}`);
   }
 
   return (
     <div className="px-4 py-3">
-      <label className="text-sm font-medium">Estado de portada</label>
+      <label className="text-sm font-medium">{label}</label>
 
       <Slider.Root
         className="relative flex items-center h-6 touch-none"

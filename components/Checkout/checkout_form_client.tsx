@@ -111,7 +111,7 @@ export default function CheckoutFormClient() {
       {step !== 3 && (
         <div className="flex flex-col gap-5">
           {/* Row 1: breadcrumbs + sidebar title aligned */}
-          <div className="flex gap-8 items-center">
+          <div className="flex gap-18 items-center">
             <div className="max-w-md w-full">
               <CheckoutBreadcrumbs
                 current={step}

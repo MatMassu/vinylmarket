@@ -66,7 +66,7 @@ export async function getProductCardViewById(id: string): Promise<ProductCardVie
 export async function getProductCardViews(): Promise<ProductCardView[]> {
   try {
     const rows = await sql`
-      SELECT 
+      SELECT
         p.id,
         p.slug,
         p.title,
@@ -75,6 +75,7 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
         p.stock,
         p.cover_condition,
         p.disc_condition,
+        p.created_at,
         MAX(CASE WHEN pi.variant = 'grid' THEN pi.url END) AS grid_image,
         MAX(CASE WHEN pi.variant = 'cart' THEN pi.url END) AS cart_image
 
@@ -94,7 +95,8 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
         p.price,
         p.stock,
         p.cover_condition,
-        p.disc_condition
+        p.disc_condition,
+        p.created_at
       ORDER BY p.id
   `;
 
@@ -113,6 +115,7 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
       inStock: row.stock > 0,
       cover_condition: row.cover_condition,
       disc_condition: row.disc_condition,
+      created_at: row.created_at,
       images: {
         grid: row.grid_image,
         cart: row.cart_image,

@@ -10,14 +10,14 @@ export default function FeaturedVinylCard({ product }: { product: ProductCardVie
   const inCart = items.find((i) => i.id === product.id);
 
   return (
-    <div className="flex flex-row gap-4 items-start">
-      <Link href={`/vinyl/${product.id}`} scroll={false} className="shrink-0 block overflow-hidden ">
+    <div className="flex flex-col gap-3 2xl:flex-row 2xl:items-start">
+      <Link href={`/vinyl/${product.id}`} scroll={false} className="shrink-0 block overflow-hidden">
         <Image
           src={product.images.grid}
           alt={`${product.title} — ${product.artist}`}
           width={230}
           height={230}
-          className="object-cover"
+          className="object-cover w-35 h-35 2xl:w-[230px] 2xl:h-[230px]"
         />
       </Link>
 
