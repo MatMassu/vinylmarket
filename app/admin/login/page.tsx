@@ -1,19 +1,43 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { createHmac, randomBytes, timingSafeEqual } from "crypto";
+
+function generateSessionToken(secret: string): { token: string; signed: string } {
+  const token = randomBytes(32).toString("hex");
+  const sig = createHmac("sha256", secret).update(token).digest("hex");
+  return { token, signed: `${token}.${sig}` };
+}
+
+export function verifySessionToken(signed: string, secret: string): boolean {
+  const dot = signed.lastIndexOf(".");
+  if (dot === -1) return false;
+  const token = signed.slice(0, dot);
+  const sig = signed.slice(dot + 1);
+  const expected = createHmac("sha256", secret).update(token).digest("hex");
+  try {
+    return timingSafeEqual(Buffer.from(sig, "hex"), Buffer.from(expected, "hex"));
+  } catch {
+    return false;
+  }
+}
 
 export default function AdminLoginPage() {
   async function login(formData: FormData) {
     "use server";
     const password = formData.get("password") as string;
-    if (password === process.env.ADMIN_SECRET) {
-      const cookieStore = await cookies();
-      cookieStore.set("admin_token", password, {
-        httpOnly: true,
-        path: "/",
-        sameSite: "strict",
-      });
-      redirect("/admin/upload");
-    }
+    const secret = process.env.ADMIN_SECRET;
+    if (!secret || password !== secret) return;
+
+    const { signed } = generateSessionToken(secret);
+    const cookieStore = await cookies();
+    cookieStore.set("admin_token", signed, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 8, // 8 hours
+    });
+    redirect("/admin/upload");
   }
 
   return (
