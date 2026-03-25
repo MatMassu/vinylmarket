@@ -31,7 +31,7 @@ export async function getProductCardViewById(id: string): Promise<ProductCardVie
     const rows = await sql`
       SELECT
         p.id, p.slug, p.title, p.artist, p.price, p.stock,
-        p.cover_condition, p.disc_condition,
+        p.cover_condition, p.disc_condition, p.created_at,
         MAX(CASE WHEN pi.variant = 'grid' THEN pi.url END) AS grid_image,
         MAX(CASE WHEN pi.variant = 'cart' THEN pi.url END) AS cart_image
       FROM products AS p
@@ -40,7 +40,7 @@ export async function getProductCardViewById(id: string): Promise<ProductCardVie
        AND pi.type = 'frente'
        AND pi.variant IN ('grid', 'cart')
       WHERE p.id = ${id}
-      GROUP BY p.id, p.slug, p.title, p.artist, p.price, p.stock, p.cover_condition, p.disc_condition
+      GROUP BY p.id, p.slug, p.title, p.artist, p.price, p.stock, p.cover_condition, p.disc_condition, p.created_at
     `;
     const row = (rows as any[])[0];
     if (!row) return null;
@@ -55,6 +55,7 @@ export async function getProductCardViewById(id: string): Promise<ProductCardVie
       inStock: row.stock > 0,
       cover_condition: row.cover_condition,
       disc_condition: row.disc_condition,
+      created_at: row.created_at,
       images: { grid: row.grid_image, cart: row.cart_image },
     };
   } catch (err) {
