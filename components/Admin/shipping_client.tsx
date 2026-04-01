@@ -24,6 +24,8 @@ type WindowOrder = {
 
 type WindowData = {
   window_id: number;
+  window_open: boolean;
+  window_opened: string;
   correo: WindowOrder[] | null;
   local: string[] | null;
 };
@@ -120,7 +122,21 @@ export default function ShippingClient() {
     <div className="min-h-screen bg-gray-50 p-8 font-mono text-sm">
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-xl font-bold">Ventana de envíos</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold">Ventana de envíos</h1>
+            {!loading && (
+              data?.window_open
+                ? <span className="flex items-center gap-1.5 text-xs text-green-700 bg-green-50 border border-green-200 px-2 py-1 rounded">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+                    Abierta desde {data.window_opened}
+                  </span>
+                : <span className="flex items-center gap-1.5 text-xs text-red-700 bg-red-50 border border-red-200 px-2 py-1 rounded">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
+                    Sin ventana abierta
+                  </span>
+            )}
+          </div>
+          </div>
           <div className="flex gap-3">
             {correo.length > 0 && (
               <a
