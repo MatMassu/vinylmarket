@@ -136,7 +136,6 @@ export default function ShippingClient() {
                   </span>
             )}
           </div>
-          </div>
           <div className="flex gap-3">
             {correo.length > 0 && (
               <a
