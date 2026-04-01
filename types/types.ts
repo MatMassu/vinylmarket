@@ -51,6 +51,7 @@ export type ProductCardView = {
   cover_condition: Grading;
   disc_condition: Grading;
   created_at: string;
+  thickness_mm: number | null;
   images: {
     grid: string;
     cart: string;

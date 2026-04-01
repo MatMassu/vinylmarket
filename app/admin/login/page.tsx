@@ -1,27 +1,15 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createHmac, randomBytes, timingSafeEqual } from "crypto";
+import { generateSessionToken } from "@/lib/admin-auth";
 
-function generateSessionToken(secret: string): { token: string; signed: string } {
-  const token = randomBytes(32).toString("hex");
-  const sig = createHmac("sha256", secret).update(token).digest("hex");
-  return { token, signed: `${token}.${sig}` };
-}
+export default async function AdminLoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string }>;
+}) {
+  const { next } = await searchParams;
+  const destination = next?.startsWith("/admin/") ? next : "/admin/upload";
 
-export function verifySessionToken(signed: string, secret: string): boolean {
-  const dot = signed.lastIndexOf(".");
-  if (dot === -1) return false;
-  const token = signed.slice(0, dot);
-  const sig = signed.slice(dot + 1);
-  const expected = createHmac("sha256", secret).update(token).digest("hex");
-  try {
-    return timingSafeEqual(Buffer.from(sig, "hex"), Buffer.from(expected, "hex"));
-  } catch {
-    return false;
-  }
-}
-
-export default function AdminLoginPage() {
   async function login(formData: FormData) {
     "use server";
     const password = formData.get("password") as string;
@@ -37,7 +25,7 @@ export default function AdminLoginPage() {
       sameSite: "strict",
       maxAge: 60 * 60 * 8, // 8 hours
     });
-    redirect("/admin/upload");
+    redirect(destination);
   }
 
   return (

@@ -10,7 +10,7 @@ export async function getFeaturedProduct(): Promise<ProductCardView | null> {
     const rows = await sql`
       SELECT
         p.id, p.slug, p.title, p.artist, p.price, p.stock, p.reserved,
-        p.cover_condition, p.disc_condition, p.created_at,
+        p.cover_condition, p.disc_condition, p.created_at, p.thickness_mm,
         MAX(CASE WHEN pi.variant = 'grid' THEN pi.url END) AS grid_image,
         MAX(CASE WHEN pi.variant = 'cart' THEN pi.url END) AS cart_image
       FROM products AS p
@@ -20,7 +20,7 @@ export async function getFeaturedProduct(): Promise<ProductCardView | null> {
        AND pi.variant IN ('grid', 'cart')
       WHERE p.featured = TRUE
       GROUP BY p.id, p.slug, p.title, p.artist, p.price, p.stock, p.reserved,
-               p.cover_condition, p.disc_condition, p.created_at
+               p.cover_condition, p.disc_condition, p.created_at, p.thickness_mm
       LIMIT 1
     `;
 
@@ -39,6 +39,7 @@ export async function getFeaturedProduct(): Promise<ProductCardView | null> {
       cover_condition: row.cover_condition,
       disc_condition: row.disc_condition,
       created_at: row.created_at,
+      thickness_mm: row.thickness_mm ?? null,
       images: { grid: row.grid_image, cart: row.cart_image },
     };
   } catch {
@@ -53,7 +54,7 @@ export async function getBestConditionVinyls(limit = 20): Promise<ProductCardVie
     const rows = await sql`
       SELECT
         p.id, p.slug, p.title, p.artist, p.price, p.stock, p.reserved,
-        p.cover_condition, p.disc_condition, p.created_at,
+        p.cover_condition, p.disc_condition, p.created_at, p.thickness_mm,
         MAX(CASE WHEN pi.variant = 'grid' THEN pi.url END) AS grid_image,
         MAX(CASE WHEN pi.variant = 'cart' THEN pi.url END) AS cart_image
       FROM products AS p
@@ -64,7 +65,7 @@ export async function getBestConditionVinyls(limit = 20): Promise<ProductCardVie
       WHERE p.stock > p.reserved
         AND p.cover_condition = ANY(${VG_AND_ABOVE as unknown as string[]})
       GROUP BY p.id, p.slug, p.title, p.artist, p.price, p.stock, p.reserved,
-               p.cover_condition, p.disc_condition, p.created_at
+               p.cover_condition, p.disc_condition, p.created_at, p.thickness_mm
       ORDER BY
         CASE p.cover_condition WHEN 'NM' THEN 1 WHEN 'VG+' THEN 2 WHEN 'VG' THEN 3 END,
         p.price DESC
@@ -83,6 +84,7 @@ export async function getBestConditionVinyls(limit = 20): Promise<ProductCardVie
       cover_condition: row.cover_condition,
       disc_condition: row.disc_condition,
       created_at: row.created_at,
+      thickness_mm: row.thickness_mm ?? null,
       images: { grid: row.grid_image, cart: row.cart_image },
     }));
   } catch {

@@ -67,6 +67,10 @@ function buildSqlPreview(
   discCount: string,
   coverCondition: Grading,
   discCondition: Grading,
+  weightG: string,
+  thicknessMm: string,
+  widthMm: string,
+  lengthMm: string,
   blobs: UploadedBlob[],
 ): string {
   const esc = (s: string) => s.replace(/'/g, "''");
@@ -75,8 +79,8 @@ function buildSqlPreview(
     .join(",\n");
 
   return (
-    `INSERT INTO products (slug, title, artist, price, stock, disc_count, cover_condition, disc_condition)\n` +
-    `VALUES ('${esc(slug)}', '${esc(title)}', '${esc(artist)}', ${price}, ${stock}, ${discCount}, '${coverCondition}', '${discCondition}');\n\n` +
+    `INSERT INTO products (slug, title, artist, price, stock, disc_count, cover_condition, disc_condition, weight_g, thickness_mm, width_mm, length_mm)\n` +
+    `VALUES ('${esc(slug)}', '${esc(title)}', '${esc(artist)}', ${price}, ${stock}, ${discCount}, '${coverCondition}', '${discCondition}', ${weightG}, ${thicknessMm}, ${widthMm}, ${lengthMm});\n\n` +
     `-- Imágenes (${blobs.length} filas)\n` +
     `INSERT INTO product_images (type, variant, url, product_id) VALUES\n` +
     `${imageRows};`
@@ -96,6 +100,10 @@ export default function UploadClient() {
   const [discCondition, setDiscCondition] = useState<Grading>("VG");
   const [slug, setSlug] = useState("");
   const [slugError, setSlugError] = useState("");
+  const [weightG, setWeightG] = useState("");
+  const [thicknessMm, setThicknessMm] = useState("");
+  const [widthMm, setWidthMm] = useState("");
+  const [lengthMm, setLengthMm] = useState("");
 
   // Photos
   const [photos, setPhotos] = useState<PhotoEntry[]>([]);
@@ -163,6 +171,10 @@ export default function UploadClient() {
       return "Cantidad de discos inválida.";
     if (!slug) return "El slug está vacío.";
     if (slugError) return slugError;
+    if (!weightG || isNaN(Number(weightG)) || Number(weightG) <= 0) return "Peso inválido.";
+    if (!thicknessMm || isNaN(Number(thicknessMm)) || Number(thicknessMm) <= 0) return "Grosor inválido.";
+    if (!widthMm || isNaN(Number(widthMm)) || Number(widthMm) <= 0) return "Ancho inválido.";
+    if (!lengthMm || isNaN(Number(lengthMm)) || Number(lengthMm) <= 0) return "Largo inválido.";
     if (photos.length === 0) return "Agregá al menos una foto.";
     const untyped = photos.filter((p) => p.type === "");
     if (untyped.length > 0) return `${untyped.length} foto(s) sin tipo asignado.`;
@@ -230,7 +242,7 @@ export default function UploadClient() {
 
     setUploadedBlobs(blobResults);
     setSqlPreview(
-      buildSqlPreview(slug, title, artist, price, stock, discCount, coverCondition, discCondition, blobResults),
+      buildSqlPreview(slug, title, artist, price, stock, discCount, coverCondition, discCondition, weightG, thicknessMm, widthMm, lengthMm, blobResults),
     );
     setStage("preview");
   }
@@ -253,6 +265,10 @@ export default function UploadClient() {
         disc_count: parseInt(discCount),
         cover_condition: coverCondition,
         disc_condition: discCondition,
+        weight_g: parseInt(weightG),
+        thickness_mm: parseInt(thicknessMm),
+        width_mm: parseInt(widthMm),
+        length_mm: parseInt(lengthMm),
         images: uploadedBlobs.map(({ type, variant, url }) => ({ type, variant, url })),
       }),
     });
@@ -272,6 +288,7 @@ export default function UploadClient() {
   function handleReset() {
     setTitle(""); setArtist(""); setPrice(""); setStock("1"); setDiscCount("1");
     setCoverCondition("VG"); setDiscCondition("VG"); setSlug(""); setSlugError("");
+    setWeightG(""); setThicknessMm(""); setWidthMm(""); setLengthMm("");
     photos.forEach((p) => URL.revokeObjectURL(p.objectUrl));
     setPhotos([]); setUploadedBlobs([]); setSqlPreview(""); setInsertError("");
     setFormError(""); setResultSlug(""); setStage("form");
@@ -420,6 +437,60 @@ export default function UploadClient() {
             >
               {GRADINGS.map((g) => <option key={g} value={g}>{g}</option>)}
             </select>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Dimensiones y peso ── */}
+      <section className="flex flex-col gap-4">
+        <h2 className="font-medium text-sm uppercase tracking-wide text-gray-500">Dimensiones y peso</h2>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-gray-500">Peso (g)</label>
+            <input
+              type="number"
+              value={weightG}
+              onChange={(e) => setWeightG(e.target.value)}
+              className="border px-3 py-2 text-sm"
+              placeholder="180"
+              min={1}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-gray-500">Grosor por disco (mm)</label>
+            <input
+              type="number"
+              value={thicknessMm}
+              onChange={(e) => setThicknessMm(e.target.value)}
+              className="border px-3 py-2 text-sm"
+              placeholder="3"
+              min={1}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-gray-500">Ancho (mm)</label>
+            <input
+              type="number"
+              value={widthMm}
+              onChange={(e) => setWidthMm(e.target.value)}
+              className="border px-3 py-2 text-sm"
+              placeholder="315"
+              min={1}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-xs text-gray-500">Largo (mm)</label>
+            <input
+              type="number"
+              value={lengthMm}
+              onChange={(e) => setLengthMm(e.target.value)}
+              className="border px-3 py-2 text-sm"
+              placeholder="315"
+              min={1}
+            />
           </div>
         </div>
       </section>

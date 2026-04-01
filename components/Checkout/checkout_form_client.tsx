@@ -4,83 +4,71 @@ import { useState } from "react";
 import MPDeviceFingerprint from "./mp_device_fingerprint";
 import CheckoutBreadcrumbs from "./checkout_breadcrumbs";
 import Contact from "./contact";
-import StepShipping from "./shipping";
+import StepLocation from "./step_location";
+import StepShipping from "./step_shipping";
 import StepSummary from "./step_summary";
 import CheckoutCartSidebar from "./checkout_cart_sidebar";
+import areaCodes from "@/data/area_codes.json";
+
+const VALID_AREA_CODES = new Set<string>(areaCodes);
 
 export type ContactData = {
   email: string;
   firstName: string;
   lastName: string;
-  phone: string;
+  phoneArea: string;
+  phoneNumber: string;
 };
 
-export type ShippingMethod = "local" | "branch" | "door";
+export type LocationData = {
+  province: string;     // underscore key e.g. "CAPITAL_FEDERAL"
+  provinceName: string; // display name e.g. "Capital Federal"
+  locality: string;
+  postalCode: string;
+};
+
+export type ShippingService = "EP" | "CP";
+export type ShippingMethod  = "local" | "branch" | "door";
 
 export type ShippingData = {
-  method: ShippingMethod | null;
-  street: string;
-  number: string;
-  floor: string;
-  apt: string;
-  neighborhood: string; // barrio for local; localidad for branch/door
-  province: string;
-  zip: string;
+  method:        ShippingMethod | null;
+  service:       ShippingService | null; // null for local
+  branchCode:    string;
+  branchDisplay: string;
+  street:        string;
+  number:        string;
+  floor:         string;
+  apt:           string;
+  cost:          number | null; // computed when method+service selected
 };
 
-export type ShippingErrors = Partial<{
-  method: string;
-  street: string;
-  number: string;
-  neighborhood: string;
-  province: string;
-  zip: string;
-}>;
+type Step = 1 | 2 | 3 | 4;
 
-type Step = 1 | 2 | 3;
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function validateShipping(data: ShippingData): ShippingErrors {
-  const e: ShippingErrors = {};
-  if (!data.method) {
-    e.method = "Seleccioná un método de envío.";
-    return e;
-  }
-  if (data.method === "local") {
-    if (!data.street)       e.street       = "Ingresá la calle.";
-    if (!data.number)       e.number       = "Ingresá el número.";
-    if (!data.neighborhood) e.neighborhood = "Ingresá el barrio.";
-  }
-  if (data.method === "branch") {
-    if (!data.province)     e.province     = "Ingresá la provincia.";
-    if (!data.neighborhood) e.neighborhood = "Ingresá la localidad.";
-  }
-  if (data.method === "door") {
-    if (!data.province)     e.province     = "Ingresá la provincia.";
-    if (!data.neighborhood) e.neighborhood = "Ingresá la localidad.";
-    if (!data.street)       e.street       = "Ingresá la calle.";
-    if (!data.number)       e.number       = "Ingresá el número.";
-    if (!data.zip)          e.zip          = "Ingresá el código postal.";
-  }
-  return e;
-}
+// Must end in .com or .com.ar, local part >= 2 chars, domain >= 2 chars before tld.
+const EMAIL_RE = /^[^\s@]{2,}@[^\s@]{2,}\.(com|com\.ar)$/i;
 
 export default function CheckoutFormClient() {
   const [step,          setStep]          = useState<Step>(1);
   const [completedUpTo, setCompletedUpTo] = useState<Step>(1);
 
-  const [contact,    setContact]    = useState<ContactData>({
-    email: "", firstName: "", lastName: "", phone: "",
+  const [contact, setContact] = useState<ContactData>({
+    email: "", firstName: "", lastName: "", phoneArea: "", phoneNumber: "",
   });
-  const [emailError, setEmailError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
+  const [emailError,       setEmailError]       = useState(false);
+  const [nameError,        setNameError]         = useState(false);
+  const [phoneAreaError,   setPhoneAreaError]    = useState(false);
+  const [phoneNumberError, setPhoneNumberError]  = useState(false);
 
-  const [shipping,      setShipping]      = useState<ShippingData>({
-    method: null, street: "", number: "", floor: "", apt: "",
-    neighborhood: "", province: "", zip: "",
+  const [location, setLocation] = useState<LocationData>({
+    province: "", provinceName: "", locality: "", postalCode: "",
   });
-  const [shippingErrors, setShippingErrors] = useState<ShippingErrors>({});
+
+  const [shipping, setShipping] = useState<ShippingData>({
+    method: null, service: null,
+    branchCode: "", branchDisplay: "",
+    street: "", number: "", floor: "", apt: "",
+    cost: null,
+  });
 
   function advance(to: Step) {
     setStep(to);
@@ -88,81 +76,99 @@ export default function CheckoutFormClient() {
   }
 
   function handleContactContinue() {
-    const emailOk = EMAIL_RE.test(contact.email);
-    const phoneOk = contact.phone.trim().length > 0;
+    const emailOk       = EMAIL_RE.test(contact.email.trim());
+    const nameOk        = contact.firstName.trim().length > 0;
+    const phoneAreaOk   = VALID_AREA_CODES.has(contact.phoneArea.trim());
+    const phoneNumberOk = /^\d{8}$/.test(contact.phoneNumber.trim());
+
     setEmailError(!emailOk);
-    setPhoneError(!phoneOk);
-    if (!emailOk || !phoneOk) return;
+    setNameError(!nameOk);
+    setPhoneAreaError(!phoneAreaOk);
+    setPhoneNumberError(!phoneNumberOk);
+
+    if (!emailOk || !nameOk || !phoneAreaOk || !phoneNumberOk) return;
     advance(2);
   }
 
-  function handleShippingContinue() {
-    const errors = validateShipping(shipping);
-    setShippingErrors(errors);
-    if (Object.keys(errors).length > 0) return;
-    advance(3);
+  function handleContactChange(field: keyof ContactData, value: string) {
+    setContact((prev) => ({ ...prev, [field]: value }));
+    if (field === "email")       setEmailError(false);
+    if (field === "firstName")   setNameError(false);
+    if (field === "phoneArea")   setPhoneAreaError(false);
+    if (field === "phoneNumber") setPhoneNumberError(false);
   }
+
+  // Reset shipping when going back to location so stale prices are cleared.
+  function handleShippingBack() {
+    setShipping({
+      method: null, service: null,
+      branchCode: "", branchDisplay: "",
+      street: "", number: "", floor: "", apt: "",
+      cost: null,
+    });
+    setStep(2);
+  }
+
+  const showSidebar = step !== 4;
 
   return (
     <>
       <MPDeviceFingerprint />
 
-      {/* Steps 1 & 2: form on left, cart sidebar on right (lg+) */}
-      {step !== 3 && (
+      {showSidebar ? (
         <div className="flex flex-col gap-5">
-          {/* Row 1: breadcrumbs + sidebar title aligned */}
-          <div className="flex gap-18 items-center">
-            <div className="max-w-md w-full">
+          {/* Row 1: breadcrumbs aligned with sidebar title */}
+          <div className="flex gap-12 items-center">
+            <div className="flex-1 min-w-0">
               <CheckoutBreadcrumbs
                 current={step}
                 completedUpTo={completedUpTo}
                 onNavigate={(s) => setStep(s)}
               />
             </div>
-            <div className="hidden lg:flex w-80 shrink-0">
-              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Tu carrito</p>
+            <div className="hidden lg:flex flex-1 shrink-0">
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+                Tu carrito
+              </p>
             </div>
           </div>
 
-          {/* Row 2: form + sidebar items aligned */}
-          <div className="flex gap-20 items-start">
-            <div className="max-w-md w-full">
+          {/* Row 2: form + sidebar, equal width */}
+          <div className="flex gap-12 items-start">
+            <div className="flex-1 min-w-0">
               {step === 1 && (
                 <Contact
                   data={contact}
                   emailError={emailError}
-                  phoneError={phoneError}
-                  onChange={(field, value) => {
-                    setContact((prev) => ({ ...prev, [field]: value }));
-                    if (field === "email") setEmailError(false);
-                    if (field === "phone") setPhoneError(false);
-                  }}
+                  nameError={nameError}
+                  phoneAreaError={phoneAreaError}
+                  phoneNumberError={phoneNumberError}
+                  onChange={handleContactChange}
                   onContinue={handleContactContinue}
                 />
               )}
               {step === 2 && (
-                <StepShipping
-                  data={shipping}
-                  errors={shippingErrors}
-                  onChange={(patch) => {
-                    setShipping((prev) => ({ ...prev, ...patch }));
-                    // clear errors for changed fields
-                    const cleared = Object.fromEntries(
-                      Object.keys(patch).map((k) => [k, undefined])
-                    );
-                    setShippingErrors((prev) => ({ ...prev, ...cleared }));
-                  }}
-                  onContinue={handleShippingContinue}
+                <StepLocation
+                  data={location}
+                  onChange={(patch) => setLocation((prev) => ({ ...prev, ...patch }))}
+                  onContinue={() => advance(3)}
                   onBack={() => setStep(1)}
+                />
+              )}
+              {step === 3 && (
+                <StepShipping
+                  location={location}
+                  data={shipping}
+                  onChange={(patch) => setShipping((prev) => ({ ...prev, ...patch }))}
+                  onContinue={() => advance(4)}
+                  onBack={handleShippingBack}
                 />
               )}
             </div>
             <CheckoutCartSidebar />
           </div>
         </div>
-      )}
-
-      {step === 3 && (
+      ) : (
         <div className="flex flex-col gap-5">
           <CheckoutBreadcrumbs
             current={step}
@@ -171,8 +177,9 @@ export default function CheckoutFormClient() {
           />
           <StepSummary
             contact={contact}
+            location={location}
             shipping={shipping}
-            onBack={() => setStep(2)}
+            onBack={() => setStep(3)}
           />
         </div>
       )}

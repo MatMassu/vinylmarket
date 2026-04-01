@@ -29,7 +29,7 @@ export async function getProductCardViewBySlug(slug: string): Promise<ProductCar
     const rows = await sql`
       SELECT
         p.id, p.slug, p.title, p.artist, p.price, p.stock,
-        p.cover_condition, p.disc_condition, p.created_at,
+        p.cover_condition, p.disc_condition, p.created_at, p.thickness_mm,
         MAX(CASE WHEN pi.variant = 'grid' THEN pi.url END) AS grid_image,
         MAX(CASE WHEN pi.variant = 'cart' THEN pi.url END) AS cart_image
       FROM products AS p
@@ -38,7 +38,8 @@ export async function getProductCardViewBySlug(slug: string): Promise<ProductCar
        AND pi.type = 'frente'
        AND pi.variant IN ('grid', 'cart')
       WHERE p.slug = ${slug}
-      GROUP BY p.id, p.slug, p.title, p.artist, p.price, p.stock, p.cover_condition, p.disc_condition, p.created_at
+      GROUP BY p.id, p.slug, p.title, p.artist, p.price, p.stock,
+               p.cover_condition, p.disc_condition, p.created_at, p.thickness_mm
     `;
     const row = (rows as any[])[0];
     if (!row) return null;
@@ -54,6 +55,7 @@ export async function getProductCardViewBySlug(slug: string): Promise<ProductCar
       cover_condition: row.cover_condition,
       disc_condition: row.disc_condition,
       created_at: row.created_at,
+      thickness_mm: row.thickness_mm ?? null,
       images: { grid: row.grid_image, cart: row.cart_image },
     };
   } catch (err) {
@@ -75,6 +77,7 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
         p.cover_condition,
         p.disc_condition,
         p.created_at,
+        p.thickness_mm,
         MAX(CASE WHEN pi.variant = 'grid' THEN pi.url END) AS grid_image,
         MAX(CASE WHEN pi.variant = 'cart' THEN pi.url END) AS cart_image
 
@@ -95,7 +98,8 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
         p.stock,
         p.cover_condition,
         p.disc_condition,
-        p.created_at
+        p.created_at,
+        p.thickness_mm
       ORDER BY p.id
   `;
 
@@ -115,6 +119,7 @@ export async function getProductCardViews(): Promise<ProductCardView[]> {
       cover_condition: row.cover_condition,
       disc_condition: row.disc_condition,
       created_at: row.created_at,
+      thickness_mm: row.thickness_mm ?? null,
       images: {
         grid: row.grid_image,
         cart: row.cart_image,

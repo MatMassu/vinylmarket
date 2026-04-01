@@ -4,44 +4,64 @@ import { useState } from "react";
 import Image from "next/image";
 import { useCart } from "../Cart/cart_context";
 import { getGuestId } from "../../lib/guest-id";
-import type { ContactData, ShippingData } from "./checkout_form_client";
+import type { ContactData, LocationData, ShippingData } from "./checkout_form_client";
 
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_CHECKOUT_URL!;
 
 const METHOD_LABEL: Record<string, string> = {
-  local:  "Envío local gratuito",
-  branch: "Retiro en sucursal (EnvioPack)",
-  door:   "Envío a domicilio (EnvioPack)",
+  local:  "Envío local",
+  branch: "Retiro en sucursal",
+  door:   "Envío a domicilio",
+};
+
+const SERVICE_LABEL: Record<string, string> = {
+  EP: "PAQ.AR Expreso",
+  CP: "PAQ.AR Clásico",
 };
 
 type Props = {
-  contact: ContactData;
+  contact:  ContactData;
+  location: LocationData;
   shipping: ShippingData;
-  onBack: () => void;
+  onBack:   () => void;
 };
 
-function formatAddress(s: ShippingData): string {
-  if (s.method === "local") {
-    const parts = [s.street, s.number, s.floor && `Piso ${s.floor}`, s.apt && `Depto ${s.apt}`, s.neighborhood].filter(Boolean);
-    return parts.join(", ");
+function formatShippingLine(location: LocationData, shipping: ShippingData): string {
+  const { method, service, branchDisplay, street, number, floor, apt } = shipping;
+  const { locality, provinceName } = location;
+
+  if (method === "local") {
+    return [locality, provinceName].filter(Boolean).join(", ");
   }
-  if (s.method === "branch") {
-    return [s.neighborhood, s.province].filter(Boolean).join(", ");
+  if (method === "branch") {
+    return [branchDisplay, locality, provinceName].filter(Boolean).join(", ");
   }
-  if (s.method === "door") {
-    const parts = [s.street, s.number, s.floor && `Piso ${s.floor}`, s.apt && `Depto ${s.apt}`, s.neighborhood, s.province, s.zip].filter(Boolean);
-    return parts.join(", ");
+  if (method === "door") {
+    const addr = [
+      street,
+      number,
+      floor  && `Piso ${floor}`,
+      apt    && `Depto ${apt}`,
+      locality,
+      provinceName,
+    ].filter(Boolean);
+    return addr.join(", ");
   }
   return "";
 }
 
-export default function StepSummary({ contact, shipping, onBack }: Props) {
+export default function StepSummary({ contact, location, shipping, onBack }: Props) {
   const { items, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState<string | null>(null);
 
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-  const shippingCost = shipping.method === "local" ? 0 : null; // null = TBD via EnvioPack API
+  const subtotal     = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const shippingCost = shipping.cost ?? 0;
+  const total        = subtotal + shippingCost;
+
+  const shippingType = shipping.method === "local"
+    ? "local"
+    : `${shipping.method}_${shipping.service?.toLowerCase() ?? ""}`;
 
   async function handlePay() {
     setLoading(true);
@@ -57,17 +77,21 @@ export default function StepSummary({ contact, shipping, onBack }: Props) {
             email:      contact.email,
             first_name: contact.firstName,
             last_name:  contact.lastName,
-            phone:      contact.phone,
           },
           shipping: {
-            method:       shipping.method,
-            street:       shipping.street,
-            number:       shipping.number,
-            floor:        shipping.floor,
-            apt:          shipping.apt,
-            neighborhood: shipping.neighborhood,
-            province:     shipping.province,
-            zip:          shipping.zip,
+            type:          shippingType,
+            cost:          shippingCost,
+            phone:         contact.phoneArea + contact.phoneNumber,
+            phone_area:    contact.phoneArea,
+            province:      location.province,
+            locality:      location.locality,
+            postal_code:   location.postalCode,
+            branch_code:   shipping.branchCode  || undefined,
+            branch_display: shipping.branchDisplay || undefined,
+            street:        shipping.street  || undefined,
+            number:        shipping.number  || undefined,
+            floor:         shipping.floor   || undefined,
+            apt:           shipping.apt     || undefined,
           },
         }),
       });
@@ -89,17 +113,18 @@ export default function StepSummary({ contact, shipping, onBack }: Props) {
   }
 
   return (
-    <div className="grid md:grid-cols-[1fr_auto] gap-8">
+    <div className="grid md:grid-cols-2 gap-8">
 
-      {/* Left: contact + shipping review */}
+      {/* Left: contact + shipping + items */}
       <div className="flex flex-col gap-6">
+
         {/* Contact */}
         <div className="flex flex-col gap-2">
           <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Contacto</h3>
           <div className="border border-gray-200 p-4 flex flex-col gap-1 text-sm">
             <p>{contact.firstName} {contact.lastName}</p>
             <p className="text-gray-500">{contact.email}</p>
-            <p className="text-gray-500">{contact.phone}</p>
+            <p className="text-gray-500">({contact.phoneArea}) {contact.phoneNumber}</p>
           </div>
         </div>
 
@@ -107,8 +132,11 @@ export default function StepSummary({ contact, shipping, onBack }: Props) {
         <div className="flex flex-col gap-2">
           <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Envío</h3>
           <div className="border border-gray-200 p-4 flex flex-col gap-1 text-sm">
-            <p className="font-medium">{shipping.method ? METHOD_LABEL[shipping.method] : "—"}</p>
-            <p className="text-gray-500">{formatAddress(shipping)}</p>
+            <p className="font-medium">
+              {shipping.method ? METHOD_LABEL[shipping.method] : "—"}
+              {shipping.service ? ` · ${SERVICE_LABEL[shipping.service]}` : ""}
+            </p>
+            <p className="text-gray-500">{formatShippingLine(location, shipping)}</p>
           </div>
         </div>
 
@@ -139,10 +167,9 @@ export default function StepSummary({ contact, shipping, onBack }: Props) {
       </div>
 
       {/* Right: totals + payment */}
-      <div className="flex flex-col gap-4 md:w-72">
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Total</h3>
         <div className="border border-gray-200 p-5 flex flex-col gap-3">
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Total</h3>
-
           <div className="flex flex-col gap-1.5 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-500">Subtotal</span>
@@ -150,18 +177,13 @@ export default function StepSummary({ contact, shipping, onBack }: Props) {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Envío</span>
-              <span>
-                {shippingCost === 0
-                  ? <span className="text-emerald-600 font-medium">Sin cargo</span>
-                  : <span className="text-gray-400 italic">A calcular</span>
-                }
-              </span>
+              <span>${shippingCost.toLocaleString()}</span>
             </div>
           </div>
 
           <div className="border-t border-gray-100 pt-3 flex justify-between font-semibold">
             <span>Total</span>
-            <span>${subtotal.toLocaleString()}{shippingCost === null && <span className="text-gray-400 text-xs font-normal"> + envío</span>}</span>
+            <span>${total.toLocaleString()}</span>
           </div>
         </div>
 

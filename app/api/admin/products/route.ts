@@ -13,6 +13,10 @@ type ProductInsert = {
   disc_count: number;
   cover_condition: Grading;
   disc_condition: Grading;
+  weight_g: number;
+  thickness_mm: number;
+  width_mm: number;
+  length_mm: number;
   images: ImageInsert[];
 };
 
@@ -41,10 +45,11 @@ export async function POST(request: Request): Promise<Response> {
 
   try {
     const rows = (await sql`
-      INSERT INTO products (slug, title, artist, price, stock, disc_count, cover_condition, disc_condition)
+      INSERT INTO products (slug, title, artist, price, stock, disc_count, cover_condition, disc_condition, weight_g, thickness_mm, width_mm, length_mm)
       VALUES (
         ${body.slug}, ${body.title}, ${body.artist}, ${body.price},
-        ${body.stock}, ${body.disc_count}, ${body.cover_condition}, ${body.disc_condition}
+        ${body.stock}, ${body.disc_count}, ${body.cover_condition}, ${body.disc_condition},
+        ${body.weight_g}, ${body.thickness_mm}, ${body.width_mm}, ${body.length_mm}
       )
       RETURNING id
     `) as { id: string }[];

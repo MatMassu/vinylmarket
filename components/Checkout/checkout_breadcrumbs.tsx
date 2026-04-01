@@ -1,9 +1,10 @@
-type Step = 1 | 2 | 3;
+type Step = 1 | 2 | 3 | 4;
 
 const STEPS: { n: Step; label: string }[] = [
   { n: 1, label: "Contacto" },
-  { n: 2, label: "Envío" },
-  { n: 3, label: "Resumen" },
+  { n: 2, label: "Ubicación" },
+  { n: 3, label: "Envío" },
+  { n: 4, label: "Resumen" },
 ];
 
 type Props = {

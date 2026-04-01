@@ -41,6 +41,7 @@ export default function HeroSection({ heroImageUrl, featured, artists }: Props) 
               src={heroImageUrl}
               alt=""
               fill
+              sizes="(max-width: 768px) 100vw, 60vw"
               className="object-cover"
               priority
             />
