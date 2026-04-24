@@ -1,14 +1,15 @@
-# Vinyl Market (v0.9.4)
-<a href=https://vinilomarket.vercel.app/>
-<img width="1913" height="1004" alt="vinilomarketv0 9 3" src="https://github.com/user-attachments/assets/212614d2-d26b-44f4-9691-f514ab8041b5" />
+# Altillo Massucco (v1.0.2)
+<a href=https://altillomassucco.com/>
+<img width="1917" height="961" alt="image" src="https://github.com/user-attachments/assets/4dce95cb-9f6a-41aa-ba21-7bbe36def681" />
 </a>
 
-**E-commerce de vinilos usados y de colección basado en Next.js**
+
+**E-commerce de vinilos usados y de colección basado en Next.js y Go**
 
 ## Objetivo 
 Comercializar una colección de vinilos usados mediante una interfaz fluida, simple e intuitiva.
 
-Cualquier potencial comprador puede buscar los productos de su interés, agregarlos a un carrito, y elegir si desea recibirlos en su domicilio mediante un énvio tercerizado o buscarlos en su lugar de origen, todo desde una misma aplicación web construida con formato SPA.
+Cualquier potencial comprador puede buscar los productos de su interés, agregarlos a un carrito y elegir el tipo de envío, todo desde una misma aplicación web construida con formato SPA.
 
 ## Roadmap de Funcionalidades
 ### UX/UI
@@ -18,12 +19,12 @@ Cualquier potencial comprador puede buscar los productos de su interés, agregar
 * [x] Sorting por mayor y menor precio. (v0.3.0)
 * [x] Paginación. (v0.5.0)
 * [x] Modal interactivo por vinilo con más detalles: descripción, tracklist, condición, y preview de calidad sonora. (v0.6.0)
-* [x] Carrito dinámico y sistema de check-out con manejo de pagos y envío. (v0.7.0)
+* [x] Carrito dinámico y sistema de check-out con manejo de pagos y envíos a todo el país. (v0.7.0)
 
 ### Back-end
 * [x] Caching para persistencia de carrito. (v0.8.0)
 * [x] Conexión a base de datos Neon serverless e imagenes hosteadas con Vercel Blob. (v0.9.0)
-* [ ] Mejoras de seguridad y performance.
+* [x] Mejoras de seguridad y performance.
 
 ### Mejoras
 * [x] Diseño responsive: sitio para desktop y móvil. (v0.6.0)
@@ -42,4 +43,4 @@ Fundamentalmente:
 * Código siguiendo best practices de diseño web, clean code y principios SOLID.
 
 ## Tools & Stack
-Next.js | React.js | TypeScript | TailwindCSS | PostgreSQL
+Next.js | Go | TypeScript | TailwindCSS | PostgreSQL
