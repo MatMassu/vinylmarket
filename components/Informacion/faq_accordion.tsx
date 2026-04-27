@@ -172,27 +172,34 @@ export default function FaqAccordion() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-col divide-y divide-gray-200 border-y border-gray-200">
+    <div className="flex flex-col border-y border-gray-200">
       {ITEMS.map((item, i) => (
-        <div key={i}>
+        <div
+          key={i}
+          className={`border-b border-gray-200 transition-colors duration-200 ${open === i ? "bg-stone-50" : ""}`}
+        >
           <button
             onClick={() => setOpen(open === i ? null : i)}
-            className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+            className={`cursor-pointer w-full flex items-center justify-between gap-4 py-4 sm:py-5 text-left px-3 sm:px-4 transition-colors duration-200 ${open === i ? "text-black" : "text-gray-700 hover:text-black"}`}
           >
-            <span className="font-medium text-sm sm:text-base">{item.q}</span>
+            <span className="font-medium text-sm sm:text-base xl:text-lg">{item.q}</span>
             <span
               className={`shrink-0 text-gray-400 transition-transform duration-200 ${open === i ? "rotate-45" : ""}`}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="xl:w-5 xl:h-5">
                 <path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
             </span>
           </button>
-          {open === i && (
-            <div className="pb-6 text-sm text-gray-700 leading-relaxed">
-              {item.a}
+          <div
+            className={`grid transition-all duration-300 ease-in-out ${open === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+          >
+            <div className="overflow-hidden">
+              <div className="px-3 sm:px-4 pb-5 sm:pb-6 text-sm xl:text-base text-gray-700 leading-relaxed">
+                {item.a}
+              </div>
             </div>
-          )}
+          </div>
         </div>
       ))}
     </div>
