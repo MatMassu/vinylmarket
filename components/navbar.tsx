@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   { label: "Inicio",      href: "/",         exact: true  },
   { label: "Catálogo",    href: "/store",     exact: false },
   { label: "Información", href: "/informacion", exact: false },
-  { label: "Contacto",    href: "/#contacto", exact: false },
+  { label: "Contacto",    href: "/contacto",  exact: false },
 ];
 
 export default function Navbar() {
