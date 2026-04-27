@@ -7,6 +7,15 @@ const RATE_WINDOW_MIN = 10;     // per N minutes
 const EMAIL_ADMIN = "altillo.massucco@gmail.com";
 const EMAIL_FROM  = "Altillo Massucco <ventas@altillomassucco.com>";
 
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function getIP(req: NextRequest): string {
   return (
     req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
@@ -59,12 +68,12 @@ export async function POST(req: NextRequest) {
         from: EMAIL_FROM,
         to: EMAIL_ADMIN,
         reply_to: email.trim(),
-        subject: `Nuevo mensaje de contacto — ${name.trim()}`,
+        subject: `Nuevo mensaje de contacto — ${escapeHtml(name.trim())}`,
         html: `
-          <p><strong>Nombre:</strong> ${name.trim()}</p>
-          <p><strong>Email:</strong> ${email.trim()}</p>
+          <p><strong>Nombre:</strong> ${escapeHtml(name.trim())}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email.trim())}</p>
           <p><strong>Mensaje:</strong></p>
-          <p style="white-space:pre-wrap">${message.trim()}</p>
+          <p style="white-space:pre-wrap">${escapeHtml(message.trim())}</p>
         `,
       }),
     });
