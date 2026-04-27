@@ -9,10 +9,10 @@ const inputClass =
   "border border-gray-300 p-2.5 text-sm xl:text-base w-full outline-none focus:border-black transition-colors bg-white";
 const errClass = "border-red-400 focus:border-red-400";
 
-export default function ContactForm() {
+export default function ContactForm({ initialMotivo }: { initialMotivo?: string }) {
   const [name,    setName]    = useState("");
   const [email,   setEmail]   = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(initialMotivo ? `${initialMotivo}\n\nNúmero de orden: ` : "");
   const [errors,  setErrors]  = useState<Record<string, string>>({});
   const [status,  setStatus]  = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [serverError, setServerError] = useState("");

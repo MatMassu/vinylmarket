@@ -1,0 +1,75 @@
+POLÍTICA DE PRIVACIDAD
+Altillo Massucco
+Última actualización: abril 2025
+
+---
+
+1. RESPONSABLE DEL TRATAMIENTO
+
+Matias Massucco — CUIL 20-41758431-6
+Cuenca 2040, Piso 15, Dpto. A, CP 1416, CABA, Argentina
+altillo.massucco@gmail.com
+
+---
+
+2. QUÉ DATOS RECOPILAMOS
+
+Al realizar una compra o enviar un mensaje de contacto, recopilamos:
+
+- Nombre y apellido
+- Dirección de correo electrónico
+- Número de teléfono
+- Dirección de envío (provincia, localidad, código postal, calle y número)
+
+Estos datos son provistos voluntariamente por el usuario. No recopilamos datos de pago: ese proceso es gestionado íntegramente por MercadoPago.
+
+El sitio utiliza Vercel Analytics para medir rendimiento técnico. Esta herramienta no utiliza cookies ni recopila datos personales identificables.
+
+---
+
+3. PARA QUÉ USAMOS TUS DATOS
+
+Los datos recopilados se utilizan exclusivamente para:
+
+- Procesar y gestionar tu compra
+- Coordinar el envío del producto
+- Responder consultas enviadas a través del formulario de contacto
+- Cumplir con obligaciones legales (impositivas, comerciales)
+
+No compartimos tus datos con terceros, salvo con los servicios necesarios para operar el sitio (MercadoPago para pagos, Correo Argentino para envíos) y en los casos exigidos por ley.
+
+---
+
+4. POR CUÁNTO TIEMPO CONSERVAMOS TUS DATOS
+
+Los datos de compra se conservan por el tiempo que exigen las obligaciones contables e impositivas vigentes en Argentina (mínimo 5 años). Los mensajes de contacto se conservan mientras sean relevantes para gestionar la consulta.
+
+---
+
+5. TUS DERECHOS
+
+De acuerdo con la Ley 25.326 de Protección de Datos Personales, tenés derecho a:
+
+- Acceder a los datos personales que tenemos sobre vos
+- Rectificar datos incorrectos o desactualizados
+- Solicitar la eliminación de tus datos, en los casos que la ley lo permita
+
+Para ejercer estos derechos, escribinos a altillo.massucco@gmail.com con el asunto "Datos personales".
+
+---
+
+6. SEGURIDAD
+
+Tomamos medidas razonables para proteger tus datos frente a accesos no autorizados. Sin embargo, ningún sistema de transmisión de datos por internet es 100% seguro.
+
+---
+
+7. REGISTRO AAIP
+
+[Pendiente — a completar según corresponda]
+
+---
+
+8. CONTACTO
+
+Para cualquier consulta relacionada con esta política, podés escribirnos a altillo.massucco@gmail.com.
