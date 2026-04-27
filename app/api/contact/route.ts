@@ -28,12 +28,12 @@ export async function POST(req: NextRequest) {
   const ip = getIP(req);
 
   // Rate limit: check recent submissions from this IP
-  const [{ count }] = await sql`
+  const rows = (await sql`
     SELECT COUNT(*) AS count FROM contact_messages
     WHERE ip = ${ip}
       AND created_at > NOW() - (${RATE_WINDOW_MIN} || ' minutes')::interval
-  `;
-  if (Number(count) >= RATE_LIMIT) {
+  `) as { count: string }[];
+  if (Number(rows[0]?.count ?? 0) >= RATE_LIMIT) {
     return NextResponse.json(
       { error: "Demasiados intentos. Esperá unos minutos e intentá de nuevo." },
       { status: 429 },
