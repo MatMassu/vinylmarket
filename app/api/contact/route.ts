@@ -55,28 +55,36 @@ export async function POST(req: NextRequest) {
     VALUES (${name.trim()}, ${email.trim()}, ${message.trim()}, ${ip})
   `;
 
-  // Send email notification via Resend
+  // Send email notification via Resend. Failure is non-fatal — message is
+  // already persisted in contact_messages and can be retrieved from there.
   const resendKey = process.env.RESEND_API_KEY;
   if (resendKey) {
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${resendKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: EMAIL_FROM,
-        to: EMAIL_ADMIN,
-        reply_to: email.trim(),
-        subject: `Nuevo mensaje de contacto — ${escapeHtml(name.trim())}`,
-        html: `
-          <p><strong>Nombre:</strong> ${escapeHtml(name.trim())}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email.trim())}</p>
-          <p><strong>Mensaje:</strong></p>
-          <p style="white-space:pre-wrap">${escapeHtml(message.trim())}</p>
-        `,
-      }),
-    });
+    try {
+      const emailRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${resendKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: EMAIL_FROM,
+          to: EMAIL_ADMIN,
+          reply_to: email.trim(),
+          subject: `Nuevo mensaje de contacto — ${escapeHtml(name.trim())}`,
+          html: `
+            <p><strong>Nombre:</strong> ${escapeHtml(name.trim())}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email.trim())}</p>
+            <p><strong>Mensaje:</strong></p>
+            <p style="white-space:pre-wrap">${escapeHtml(message.trim())}</p>
+          `,
+        }),
+      });
+      if (!emailRes.ok) {
+        console.error("contact: resend error", emailRes.status, await emailRes.text());
+      }
+    } catch (err) {
+      console.error("contact: failed to send notification email", err);
+    }
   }
 
   return NextResponse.json({ ok: true });
