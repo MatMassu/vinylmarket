@@ -93,7 +93,7 @@ export default function LegalContent({ initialSection }: { initialSection?: stri
           <p className="text-xs text-gray-400 mb-6">Última actualización: abril 2025</p>
 
           <Heading2>1. Datos del vendedor</Heading2>
-          <P>Responsable: Matias Massucco — CUIL 20-41758431-6<br />
+          <P>Responsable: Matias Massucco - CUIL 20-41758431-6<br />
             Domicilio: Cuenca 2040, Piso 15, Dpto. A, CP 1416, CABA, Argentina<br />
             Contacto: altillo.massucco@gmail.com / WhatsApp (011) 3067-1811</P>
 
@@ -134,7 +134,7 @@ export default function LegalContent({ initialSection }: { initialSection?: stri
           <p className="text-xs text-gray-400 mb-6">Última actualización: abril 2025</p>
 
           <Heading2>1. Responsable del tratamiento</Heading2>
-          <P>Matias Massucco — CUIL 20-41758431-6<br />
+          <P>Matias Massucco - CUIL 20-41758431-6<br />
             Cuenca 2040, Piso 15, Dpto. A, CP 1416, CABA, Argentina<br />
             altillo.massucco@gmail.com</P>
 
@@ -163,9 +163,6 @@ export default function LegalContent({ initialSection }: { initialSection?: stri
 
           <Heading2>5. Tus derechos</Heading2>
           <P>De acuerdo con la Ley 25.326, tenés derecho a acceder, rectificar y solicitar la eliminación de tus datos personales. Para ejercer estos derechos, escribinos a altillo.massucco@gmail.com con el asunto "Datos personales".</P>
-
-          <Heading2>6. Registro AAIP</Heading2>
-          <P>Inscripción ante la Agencia de Acceso a la Información Pública: en trámite.</P>
         </section>
 
         {/* ── Devoluciones ── */}
@@ -178,7 +175,7 @@ export default function LegalContent({ initialSection }: { initialSection?: stri
           <p className="text-xs text-gray-400 mb-6">Última actualización: abril 2025</p>
 
           <Heading2>1. Derecho de arrepentimiento</Heading2>
-          <P>De acuerdo con el artículo 34 de la Ley 24.240 y la Resolución 424/2020, tenés derecho a arrepentirte de tu compra dentro de los 10 días corridos desde que recibiste el producto, sin necesidad de dar ningún motivo.</P>
+          <P>De acuerdo con el artículo 34 de la Ley 24.240 y la Resolución 424/2020, tenés derecho a arrepentirte de tu compra dentro de los 10 días corridos desde que recibiste el producto.</P>
 
           <Heading2>2. Cómo ejercer el derecho</Heading2>
           <P>Para iniciar una devolución, completá el{" "}
@@ -191,11 +188,11 @@ export default function LegalContent({ initialSection }: { initialSection?: stri
           <Ul>
             <li>El plazo para solicitar la devolución es de 10 días corridos desde la recepción del producto.</li>
             <li>El producto debe devolverse en el mismo estado en que fue recibido.</li>
-            <li>La devolución del envío se coordina por nuestra cuenta — no debés abonar ningún costo.</li>
+            <li>El monto a reembolsar corresponde al monto total abonado en la compra correspondiente. Dado que el envío es tercerizado, el mismo debera ser abonado por el usuario.</li>
           </Ul>
 
           <Heading2>4. Reembolso</Heading2>
-          <P>Una vez recibido el producto y verificado su estado, se reembolsará el precio de compra más el costo de envío original, a través del mismo medio de pago utilizado. El plazo de acreditación puede demorar entre 3 y 15 días hábiles según el medio de pago.</P>
+          <P>Una vez recibido el producto y verificado su estado, se reembolsará el precio de compra a través del mismo medio de pago utilizado. El plazo de acreditación puede demorar entre 3 y 15 días hábiles según el medio de pago.</P>
 
           <Heading2>5. Excepciones</Heading2>
           <P>No aplica el derecho de arrepentimiento en los casos previstos por el artículo 34 de la Ley 24.240 (por ejemplo, productos con uso evidente posterior a la recepción que los haya deteriorado).</P>
